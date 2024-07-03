@@ -1,0 +1,17 @@
+{
+    "editor.formatOnSave": true,
+    "angular-schematics.schematicsDefaultOptions": {
+        "angular-component": {
+            "skipChangeDetectionOnPush": true,
+            "skipDisplayBlock": true,
+            "ngOnInit": true
+        },
+        "angular-*": {
+            "externalTemplate": true,
+            "style": "scss"
+        },
+        "angular-page": {
+            "skipChangeDetectionOnPush": true
+        }
+    }
+}
