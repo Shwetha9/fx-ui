@@ -62,7 +62,7 @@
         },
         {
             "name": "FxUiButtonComponent",
-            "id": "component-FxUiButtonComponent-5928c7d87abf32434e4077b944f667441a5002771cf774ae00b069675dd24cf53e476699942d0fcc6b27eb953f62034033c1aa8b8bab6fcf9f830ec33e314dbc",
+            "id": "component-FxUiButtonComponent-7dd01e2d35ad24a6173b4064ff43ae1c119c27cb983495fc7417ab73cdf6f18ae4385af839921181bbc2d68b0b4afa9e7c274fb9416942dba3d1df79bedb51b0",
             "file": "src/app/ui-lib/atomic/atoms/fx-ui-button/fx-ui-button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -80,6 +80,16 @@
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [
+                {
+                    "name": "icon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 25,
+                    "required": false
+                },
                 {
                     "name": "iconPosition",
                     "deprecated": false,
@@ -121,8 +131,39 @@
                     "required": true
                 }
             ],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "buttonClickEvent",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 23,
+                    "required": false
+                }
+            ],
             "propertiesClass": [
+                {
+                    "name": "buttonClickEvent",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 23,
+                    "required": false
+                },
+                {
+                    "name": "classModifiers",
+                    "defaultValue": "{}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 24
+                },
                 {
                     "name": "color",
                     "defaultValue": "input<FxUiButtonColor>('secondary')",
@@ -132,6 +173,16 @@
                     "optional": false,
                     "description": "",
                     "line": 18
+                },
+                {
+                    "name": "icon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 25,
+                    "required": false
                 },
                 {
                     "name": "iconPosition",
@@ -151,7 +202,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 47,
                     "modifierKind": [
                         148
                     ]
@@ -198,7 +249,7 @@
                 },
                 {
                     "name": "type",
-                    "defaultValue": "input<FxUiButtonType>('submitBtn')",
+                    "defaultValue": "input<FxUiButtonType>('submit')",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -209,12 +260,32 @@
             ],
             "methodsClass": [
                 {
+                    "name": "generateButtonClass",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "literal type",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "handleButtonClick",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 42,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 24,
+                    "line": 27,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -233,11 +304,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, OnInit, input, computed } from '@angular/core';\nimport { FxUiButtonType, FxUiButtonSize, FxUiButtonColor, FxUiButtonShape, FxUiButtonIconPosition, FxUiButtonState } from './fx-ui-button.component.type';\n\n@Component({\n  selector: 'fx-ui-button',\n  standalone: true,\n  imports: [\n    CommonModule,\n  ],\n  templateUrl: './fx-ui-button.component.html',\n  styleUrls: ['./fx-ui-button.component.scss'],\n})\nexport class FxUiButtonComponent implements OnInit {\n\n  type = input<FxUiButtonType>('submitBtn');\n  size = input<FxUiButtonSize>('medium');\n  color = input<FxUiButtonColor>('secondary');\n  shape = input.required<FxUiButtonShape>();\n  iconPosition = input.required<FxUiButtonIconPosition>();\n  state = input.required<FxUiButtonState>();\n  label = input.required<string>();\n\n  ngOnInit(): void {}\n\n  // Computed properties\n  readonly isDisabled = computed(() => this.state() === 'disabled' || this.state() === 'loading');\n}\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, OnInit, input, computed, output } from '@angular/core';\nimport { FxUiButtonType, FxUiButtonSize, FxUiButtonColor, FxUiButtonShape, FxUiButtonIconPosition, FxUiButtonState } from './fx-ui-button.component.type';\n\n@Component({\n  selector: 'fx-ui-button',\n  standalone: true,\n  imports: [\n    CommonModule,\n  ],\n  templateUrl: './fx-ui-button.component.html',\n  styleUrls: ['./fx-ui-button.component.scss'],\n})\nexport class FxUiButtonComponent implements OnInit {\n\n  type = input<FxUiButtonType>('submit');\n  size = input<FxUiButtonSize>('medium');\n  color = input<FxUiButtonColor>('secondary');\n  shape = input.required<FxUiButtonShape>();\n  iconPosition = input.required<FxUiButtonIconPosition>();\n  state = input.required<FxUiButtonState>();\n  label = input.required<string>();\n  buttonClickEvent = output<void>();\n  classModifiers: {[key:string]:boolean} = {};\n  icon = input<string>();\n\n  ngOnInit(): void {\n    this.classModifiers = this.generateButtonClass();\n  }\n\n  generateButtonClass(): {[key:string]:boolean}  {\n    return {\n      [`fx-ui-button--${this.size()}`]: !!this.size() ,\n      [`fx-ui-button--${this.color()}`]: !!this.color() ,\n      [`fx-ui-button--${this.shape()}`]: !!this.shape(),\n      [`fx-ui-button--${this.iconPosition()}`]: !!this.iconPosition(),\n      [`fx-ui-button--${this.state()}`]: !!this.state(),\n    };\n\n  };\n\n  handleButtonClick(): void {\n    this.buttonClickEvent.emit();\n  }\n\n  // Computed properties\n  readonly isDisabled = computed(() => this.state() === 'disabled' || this.state() === 'loading');\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": "/* Basic button styles */\n\n@use '../../../../assets/scss/variables' as *;\n\n.fx-ui-button {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  border: none;\n  cursor: pointer;\n  transition: all 0.3s ease;\n  border-radius: 4px;\n\n  &-submit {\n  }\n  &-navigate {\n  }\n  &--primary {\n    background-color: $primary;\n    color: #fff;\n    &:hover {\n      background-color: light()\n    }\n  }\n  &--small {\n    padding: 0.25rem 0.5rem;\n    font-size: 1rem;\n  }\n  &--medium {\n    padding: 1.25rem 2.5rem;\n    font-size: 1.5rem;\n  }\n  &--large {\n    padding: 0.75rem 1.5rem;\n    font-size: 1.75rem;\n  }\n}\n",
                     "styleUrl": "./fx-ui-button.component.scss"
                 }
             ],
@@ -246,7 +317,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<button></button>\n"
+            "templateData": "<button\n  [attr.aria-label]=\"label()\"\n  [attr.aria-disabled]=\"isDisabled()\"\n  [attr.aria-pressed]=\"state() === 'active'\"\n  [attr.aria-describedby]=\"label() + '-description'\"\n  class=\"fx-ui-button\"\n  (click)=\"handleButtonClick()\"\n  [ngClass]=\"classModifiers\"\n  [disabled]=\"isDisabled()\"\n>\n  <ng-container *ngIf=\"iconPosition() === 'left'\">\n    <span class=\"fx-button-icon--left\">\n      {{ icon() }}\n    </span>\n  </ng-container>\n  {{ label() }}\n  <ng-container *ngIf=\"iconPosition() === 'right'\">\n    <span class=\"fx-button-icon--right\">\n      {{ icon() }}\n    </span>\n  </ng-container>\n</button>\n"
         },
         {
             "name": "UiLibComponent",
@@ -303,7 +374,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "ApplicationConfig",
-                "defaultValue": "{\n  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]\n}"
+                "defaultValue": "{\n  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideStore()]\n}"
             }
         ],
         "functions": [],
@@ -323,7 +394,7 @@
                 "name": "FxUiButtonIconPosition",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "\"icon\" | \"icon-left\" | \"icon-right\"",
+                "rawtype": "\"icon\" | \"left\" | \"right\"",
                 "file": "src/app/ui-lib/atomic/atoms/fx-ui-button/fx-ui-button.component.type.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -367,7 +438,7 @@
                 "name": "FxUiButtonType",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "\"submitBtn\" | \"linkBtn\"",
+                "rawtype": "\"submit\" | \"navigate\"",
                 "file": "src/app/ui-lib/atomic/atoms/fx-ui-button/fx-ui-button.component.type.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -386,7 +457,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "ApplicationConfig",
-                    "defaultValue": "{\n  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]\n}"
+                    "defaultValue": "{\n  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideStore()]\n}"
                 }
             ]
         },
@@ -409,7 +480,7 @@
                     "name": "FxUiButtonIconPosition",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "\"icon\" | \"icon-left\" | \"icon-right\"",
+                    "rawtype": "\"icon\" | \"left\" | \"right\"",
                     "file": "src/app/ui-lib/atomic/atoms/fx-ui-button/fx-ui-button.component.type.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -453,7 +524,7 @@
                     "name": "FxUiButtonType",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "\"submitBtn\" | \"linkBtn\"",
+                    "rawtype": "\"submit\" | \"navigate\"",
                     "file": "src/app/ui-lib/atomic/atoms/fx-ui-button/fx-ui-button.component.type.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -493,7 +564,7 @@
                 "linktype": "component",
                 "name": "FxUiButtonComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/14",
+                "coverageCount": "0/21",
                 "status": "low"
             },
             {

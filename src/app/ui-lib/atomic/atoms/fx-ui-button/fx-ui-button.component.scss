@@ -1,0 +1,157 @@
+/* Basic button styles */
+
+@use "../../../../assets/scss/variables" as *;
+
+$selector: "fx-button";
+
+.fx-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+
+  &--fill {
+    color: $grey-100;
+    &.#{$selector}--primary {
+      background-color: $primary;
+      &:hover {
+        background-color: light($primary, 10%);
+      }
+    }
+    &.#{$selector}--secondary {
+      background-color: $secondary;
+
+      &:hover {
+        background-color: light($secondary, 10%);
+      }
+    }
+    &.#{$selector}--tertiary {
+      background-color: $tertiary;
+      color: $grey-900;
+      &:hover {
+        background-color: light($tertiary, 10%);
+      }
+    }
+
+    &.#{$selector}--success {
+      background-color: $success;
+      &:hover {
+        background-color: light($success, 10%);
+      }
+    }
+
+    &.#{$selector}--warning {
+      background-color: $warning;
+      color: $grey-800;
+      &:hover {
+        background-color: light($warning, 10%);
+      }
+    }
+
+    &.#{$selector}--danger {
+      background-color: $error;
+      color: $grey-100;
+      &:hover {
+        background-color: light($error, 10%);
+      }
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+
+    &.#{$selector}--primary {
+      color: $primary;
+      border: 1px solid $primary;
+      &:hover {
+        background-color: $primary;
+      }
+    }
+    &.#{$selector}--secondary {
+      color: $secondary;
+      border: 1px solid $secondary;
+      &:hover {
+        background-color: $secondary;
+      }
+    }
+    &.#{$selector}--tertiary {
+      color: $tertiary;
+      border: 1px solid $tertiary;
+      &:hover {
+        background-color: $tertiary;
+      }
+    }
+
+    &.#{$selector}--success {
+      color: $success;
+      border: 1px solid $success;
+      &:hover {
+        background-color: $success;
+      }
+    }
+
+    &.#{$selector}--warning {
+      color: $warning;
+      border: 1px solid $warning;
+      &:hover {
+        background-color: $warning;
+      }
+    }
+
+    &.#{$selector}--danger {
+      color: $error;
+      border: 1px solid $error;
+      &:hover {
+        background-color: $error;
+      }
+    }
+    &:hover {
+      color: $grey-100 !important;
+    }
+  }
+  &--small {
+    padding: 0.25rem 0.5rem;
+    font-size: 1rem;
+  }
+  &--medium {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.5rem;
+  }
+  &--large {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.75rem;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  &-icon {
+    font-size: 28px;
+  }
+  &-icon--left {
+    margin-right: 0.5rem;
+  }
+  &-icon--right {
+    margin-left: 0.5rem;
+  }
+  &--loading {
+    opacity: 0.85;
+    pointer-events: none;
+    .fx-button-icon {
+      animation: spin 1s infinite linear;
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+}

@@ -1,1 +1,31 @@
-<button>{{ label() }}</button>
+<button
+  [attr.aria-label]="label()"
+  [attr.aria-disabled]="isDisabled()"
+  [attr.aria-pressed]="state() === 'active'"
+  [attr.aria-describedby]="label() + '-description'"
+  class="fx-button"
+  (click)="handleButtonClick()"
+  [ngClass]="classModifiers"
+  [disabled]="isDisabled()"
+>
+  <ng-container *ngIf="iconPosition() === 'left'">
+    <span class="material-symbols-outlined fx-button-icon fx-button-icon--left">
+      {{ icon() }}
+    </span>
+  </ng-container>
+  <span> {{ label() }}</span>
+  <ng-container *ngIf="iconPosition() === 'right'">
+    <span
+      class="material-symbols-outlined fx-button-icon fx-button-icon--right"
+    >
+      {{ icon() }}
+    </span>
+  </ng-container>
+  @if (state() === "loading") {
+    <span
+      class="material-symbols-outlined fx-button-icon fx-button-icon--right"
+    >
+      progress_activity
+    </span>
+  }
+</button>
