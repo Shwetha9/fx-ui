@@ -62,7 +62,7 @@
         },
         {
             "name": "FxUiButtonComponent",
-            "id": "component-FxUiButtonComponent-7dd01e2d35ad24a6173b4064ff43ae1c119c27cb983495fc7417ab73cdf6f18ae4385af839921181bbc2d68b0b4afa9e7c274fb9416942dba3d1df79bedb51b0",
+            "id": "component-FxUiButtonComponent-22b624d216ac1bc5c0989c77d0475a2cf7ef93ca5318b0e6f0aa699139c0dd2f0d1eafab50a86d244d7eb72110592b2debffc86911c370c3ae1e8627b35ea169",
             "file": "src/app/ui-lib/atomic/atoms/fx-ui-button/fx-ui-button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -202,7 +202,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 47,
+                    "line": 52,
                     "modifierKind": [
                         148
                     ]
@@ -249,7 +249,7 @@
                 },
                 {
                     "name": "type",
-                    "defaultValue": "input<FxUiButtonType>('submit')",
+                    "defaultValue": "input<FxUiButtonType>('fill')",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -265,7 +265,7 @@
                     "optional": false,
                     "returnType": "literal type",
                     "typeParameters": [],
-                    "line": 31,
+                    "line": 35,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -275,7 +275,17 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 42,
+                    "line": 47,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnChanges",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -304,11 +314,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, OnInit, input, computed, output } from '@angular/core';\nimport { FxUiButtonType, FxUiButtonSize, FxUiButtonColor, FxUiButtonShape, FxUiButtonIconPosition, FxUiButtonState } from './fx-ui-button.component.type';\n\n@Component({\n  selector: 'fx-ui-button',\n  standalone: true,\n  imports: [\n    CommonModule,\n  ],\n  templateUrl: './fx-ui-button.component.html',\n  styleUrls: ['./fx-ui-button.component.scss'],\n})\nexport class FxUiButtonComponent implements OnInit {\n\n  type = input<FxUiButtonType>('submit');\n  size = input<FxUiButtonSize>('medium');\n  color = input<FxUiButtonColor>('secondary');\n  shape = input.required<FxUiButtonShape>();\n  iconPosition = input.required<FxUiButtonIconPosition>();\n  state = input.required<FxUiButtonState>();\n  label = input.required<string>();\n  buttonClickEvent = output<void>();\n  classModifiers: {[key:string]:boolean} = {};\n  icon = input<string>();\n\n  ngOnInit(): void {\n    this.classModifiers = this.generateButtonClass();\n  }\n\n  generateButtonClass(): {[key:string]:boolean}  {\n    return {\n      [`fx-ui-button--${this.size()}`]: !!this.size() ,\n      [`fx-ui-button--${this.color()}`]: !!this.color() ,\n      [`fx-ui-button--${this.shape()}`]: !!this.shape(),\n      [`fx-ui-button--${this.iconPosition()}`]: !!this.iconPosition(),\n      [`fx-ui-button--${this.state()}`]: !!this.state(),\n    };\n\n  };\n\n  handleButtonClick(): void {\n    this.buttonClickEvent.emit();\n  }\n\n  // Computed properties\n  readonly isDisabled = computed(() => this.state() === 'disabled' || this.state() === 'loading');\n}\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, OnInit, input, computed, output } from '@angular/core';\nimport { FxUiButtonType, FxUiButtonSize, FxUiButtonColor, FxUiButtonShape, FxUiButtonIconPosition, FxUiButtonState } from './fx-ui-button.component.type';\n\n@Component({\n  selector: 'fx-ui-button',\n  standalone: true,\n  imports: [\n    CommonModule, \n  ],\n  templateUrl: './fx-ui-button.component.html',\n  styleUrls: ['./fx-ui-button.component.scss'],\n})\nexport class FxUiButtonComponent implements OnInit {\n\n  type = input<FxUiButtonType>('fill');\n  size = input<FxUiButtonSize>('medium');\n  color = input<FxUiButtonColor>('secondary');\n  shape = input.required<FxUiButtonShape>();\n  iconPosition = input.required<FxUiButtonIconPosition>();\n  state = input.required<FxUiButtonState>();\n  label = input.required<string>();\n  buttonClickEvent = output<void>();\n  classModifiers: {[key:string]:boolean} = {};\n  icon = input<string>();\n\n  ngOnInit(): void {\n    this.classModifiers = this.generateButtonClass();\n  }\n\n  ngOnChanges(): void {\n    this.classModifiers = this.generateButtonClass();\n  }\n\n  generateButtonClass(): {[key:string]:boolean}  {\n    return {\n      [`fx-button--${this.size()}`]: !!this.size() ,\n      [`fx-button--${this.color()}`]: !!this.color() ,\n      [`fx-button--${this.shape()}`]: !!this.shape(),\n      [`fx-button--${this.iconPosition()}`]: !!this.iconPosition(),\n      [`fx-button--${this.state()}`]: !!this.state(),\n      [`fx-button--${this.type()}`]: !!this.type()\n    };\n\n  };\n\n  handleButtonClick(): void {\n    this.buttonClickEvent.emit();\n  }\n\n  // Computed properties\n  readonly isDisabled = computed(() => this.state() === 'disabled' || this.state() === 'loading');\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "/* Basic button styles */\n\n@use '../../../../assets/scss/variables' as *;\n\n.fx-ui-button {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  border: none;\n  cursor: pointer;\n  transition: all 0.3s ease;\n  border-radius: 4px;\n\n  &-submit {\n  }\n  &-navigate {\n  }\n  &--primary {\n    background-color: $primary;\n    color: #fff;\n    &:hover {\n      background-color: light()\n    }\n  }\n  &--small {\n    padding: 0.25rem 0.5rem;\n    font-size: 1rem;\n  }\n  &--medium {\n    padding: 1.25rem 2.5rem;\n    font-size: 1.5rem;\n  }\n  &--large {\n    padding: 0.75rem 1.5rem;\n    font-size: 1.75rem;\n  }\n}\n",
+                    "data": "/* Basic button styles */\n\n@use \"../../../../assets/scss/variables\" as *;\n\n$selector: \"fx-button\";\n\n.fx-button {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  border: none;\n  cursor: pointer;\n  transition: all 0.3s ease;\n  border-radius: 4px;\n\n  &--fill {\n    color: $grey-100;\n    &.#{$selector}--primary {\n      background-color: $primary;\n      &:hover {\n        background-color: light($primary, 10%);\n      }\n    }\n    &.#{$selector}--secondary {\n      background-color: $secondary;\n\n      &:hover {\n        background-color: light($secondary, 10%);\n      }\n    }\n    &.#{$selector}--tertiary {\n      background-color: $tertiary;\n      color: $grey-900;\n      &:hover {\n        background-color: light($tertiary, 10%);\n      }\n    }\n\n    &.#{$selector}--success {\n      background-color: $success;\n      &:hover {\n        background-color: light($success, 10%);\n      }\n    }\n\n    &.#{$selector}--warning {\n      background-color: $warning;\n      color: $grey-800;\n      &:hover {\n        background-color: light($warning, 10%);\n      }\n    }\n\n    &.#{$selector}--danger {\n      background-color: $error;\n      color: $grey-100;\n      &:hover {\n        background-color: light($error, 10%);\n      }\n    }\n  }\n\n  &--outline {\n    background-color: transparent;\n\n    &.#{$selector}--primary {\n      color: $primary;\n      border: 1px solid $primary;\n      &:hover {\n        background-color: $primary;\n      }\n    }\n    &.#{$selector}--secondary {\n      color: $secondary;\n      border: 1px solid $secondary;\n      &:hover {\n        background-color: $secondary;\n      }\n    }\n    &.#{$selector}--tertiary {\n      color: $tertiary;\n      border: 1px solid $tertiary;\n      &:hover {\n        background-color: $tertiary;\n      }\n    }\n\n    &.#{$selector}--success {\n      color: $success;\n      border: 1px solid $success;\n      &:hover {\n        background-color: $success;\n      }\n    }\n\n    &.#{$selector}--warning {\n      color: $warning;\n      border: 1px solid $warning;\n      &:hover {\n        background-color: $warning;\n      }\n    }\n\n    &.#{$selector}--danger {\n      color: $error;\n      border: 1px solid $error;\n      &:hover {\n        background-color: $error;\n      }\n    }\n    &:hover {\n      color: $grey-100 !important;\n    }\n  }\n  &--small {\n    padding: 0.25rem 0.5rem;\n    font-size: 1rem;\n  }\n  &--medium {\n    padding: 1.25rem 2.5rem;\n    font-size: 1.5rem;\n  }\n  &--large {\n    padding: 0.75rem 1.5rem;\n    font-size: 1.75rem;\n  }\n\n  &--disabled {\n    cursor: not-allowed;\n    opacity: 0.5;\n  }\n  &-icon {\n    font-size: 28px;\n  }\n  &-icon--left {\n    margin-right: 0.5rem;\n  }\n  &-icon--right {\n    margin-left: 0.5rem;\n  }\n  &--loading {\n    opacity: 0.85;\n    pointer-events: none;\n    .fx-button-icon {\n      animation: spin 1s infinite linear;\n\n      @keyframes spin {\n        from {\n          transform: rotate(0deg);\n        }\n        to {\n          transform: rotate(360deg);\n        }\n      }\n    }\n  }\n}\n",
                     "styleUrl": "./fx-ui-button.component.scss"
                 }
             ],
@@ -317,7 +327,358 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<button\n  [attr.aria-label]=\"label()\"\n  [attr.aria-disabled]=\"isDisabled()\"\n  [attr.aria-pressed]=\"state() === 'active'\"\n  [attr.aria-describedby]=\"label() + '-description'\"\n  class=\"fx-ui-button\"\n  (click)=\"handleButtonClick()\"\n  [ngClass]=\"classModifiers\"\n  [disabled]=\"isDisabled()\"\n>\n  <ng-container *ngIf=\"iconPosition() === 'left'\">\n    <span class=\"fx-button-icon--left\">\n      {{ icon() }}\n    </span>\n  </ng-container>\n  {{ label() }}\n  <ng-container *ngIf=\"iconPosition() === 'right'\">\n    <span class=\"fx-button-icon--right\">\n      {{ icon() }}\n    </span>\n  </ng-container>\n</button>\n"
+            "templateData": "<button\n  [attr.aria-label]=\"label()\"\n  [attr.aria-disabled]=\"isDisabled()\"\n  [attr.aria-pressed]=\"state() === 'active'\"\n  [attr.aria-describedby]=\"label() + '-description'\"\n  class=\"fx-button\"\n  (click)=\"handleButtonClick()\"\n  [ngClass]=\"classModifiers\"\n  [disabled]=\"isDisabled()\"\n>\n  <ng-container *ngIf=\"iconPosition() === 'left'\">\n    <span class=\"material-symbols-outlined fx-button-icon fx-button-icon--left\">\n      {{ icon() }}\n    </span>\n  </ng-container>\n  <span> {{ label() }}</span>\n  <ng-container *ngIf=\"iconPosition() === 'right'\">\n    <span\n      class=\"material-symbols-outlined fx-button-icon fx-button-icon--right\"\n    >\n      {{ icon() }}\n    </span>\n  </ng-container>\n  @if (state() === \"loading\") {\n    <span\n      class=\"material-symbols-outlined fx-button-icon fx-button-icon--right\"\n    >\n      progress_activity\n    </span>\n  }\n</button>\n"
+        },
+        {
+            "name": "FxUiInputCheckboxComponent",
+            "id": "component-FxUiInputCheckboxComponent-34372a0045ec14e099fcfc4189a4f76fa23e6ed2a75df6cf6e5cd36c80b374eb5251264428484e3717299932fab0ebeb0db50cbab38c0b31b7caae8602034ed2",
+            "file": "src/app/ui-lib/atomic/atoms/form-elements/fx-ui-input-checkbox/fx-ui-input-checkbox.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-fx-ui-input-checkbox",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./fx-ui-input-checkbox.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 15,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, type OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-fx-ui-input-checkbox',\n  standalone: true,\n  imports: [\n    CommonModule,\n  ],\n  templateUrl: './fx-ui-input-checkbox.component.html',\n  styleUrl: './fx-ui-input-checkbox.component.scss',\n})\nexport class FxUiInputCheckboxComponent implements OnInit {\n\n  ngOnInit(): void { }\n\n}\n",
+            "styleUrl": "./fx-ui-input-checkbox.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>fx-ui-input-checkbox works!</p>,\n"
+        },
+        {
+            "name": "FxUiInputRadioComponent",
+            "id": "component-FxUiInputRadioComponent-05e31b946a8091065dc1b4460d92792be848d3f3fdeabf22387ddeccac8e5e139d5902e425d0dc499982c2dfe6f02d73053ab653662cdb1b4b14307a4784d690",
+            "file": "src/app/ui-lib/atomic/atoms/form-elements/fx-ui-input-radio/fx-ui-input-radio.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-fx-ui-input-radio",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./fx-ui-input-radio.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 15,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, type OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-fx-ui-input-radio',\n  standalone: true,\n  imports: [\n    CommonModule,\n  ],\n  templateUrl: './fx-ui-input-radio.component.html',\n  styleUrl: './fx-ui-input-radio.component.scss',\n})\nexport class FxUiInputRadioComponent implements OnInit {\n\n  ngOnInit(): void { }\n\n}\n",
+            "styleUrl": "./fx-ui-input-radio.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>fx-ui-input-radio works!</p>,\n"
+        },
+        {
+            "name": "FxUiInputTextComponent",
+            "id": "component-FxUiInputTextComponent-911774afea1ce9b9414746c3b3763c7805c36ee25fefeedb4ec7f9416a6e9d92ac5af998fd1e731ee82ec550299dcd6be670f3ab4f63892db2a7d58f60621d75",
+            "file": "src/app/ui-lib/atomic/atoms/form-elements/fx-ui-input-text/fx-ui-input-text.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-fx-ui-input-text",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./fx-ui-input-text.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 15,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, type OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-fx-ui-input-text',\n  standalone: true,\n  imports: [\n    CommonModule,\n  ],\n  templateUrl: './fx-ui-input-text.component.html',\n  styleUrl: './fx-ui-input-text.component.scss',\n})\nexport class FxUiInputTextComponent implements OnInit {\n\n  ngOnInit(): void { }\n\n}\n",
+            "styleUrl": "./fx-ui-input-text.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>fx-ui-input-text works!</p>,\n"
+        },
+        {
+            "name": "FxUiStandardFormComponent",
+            "id": "component-FxUiStandardFormComponent-516a63974107ab1c4dd34c9328e15d389c52609468625e8ae1ceda8a3819dc49576e457902dbe3ccc715290109f7fa3510435d25ee2ac465c70f8b8e1325f644",
+            "file": "src/app/ui-lib/atomic/molecules/form-elements/fx-ui-standard-form/fx-ui-standard-form.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-fx-ui-standard-form",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./fx-ui-standard-form.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 15,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, type OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-fx-ui-standard-form',\n  standalone: true,\n  imports: [\n    CommonModule,\n  ],\n  templateUrl: './fx-ui-standard-form.component.html',\n  styleUrl: './fx-ui-standard-form.component.scss',\n})\nexport class FxUiStandardFormComponent implements OnInit {\n\n  ngOnInit(): void { }\n\n}\n",
+            "styleUrl": "./fx-ui-standard-form.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>fx-ui-standard-form works!</p>,\n"
+        },
+        {
+            "name": "FxUiToggleSwitchComponent",
+            "id": "component-FxUiToggleSwitchComponent-ed6c3e983c32b432943698cb30ef764abbb916ab6b7d9c0c7ff6e0cbde0b48ffa3ed285046bfb5340f70585f3f26033b8aaa73da7b9c95c16c4d97e2741fe381",
+            "file": "src/app/ui-lib/atomic/molecules/fx-ui-toggle-switch/fx-ui-toggle-switch.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-fx-ui-toggle-switch",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./fx-ui-toggle-switch.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "toggleInputId",
+                    "defaultValue": "input<string>('toggleInputId')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "togglePosition",
+                    "defaultValue": "signal<boolean>(false)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "toggleSupportText",
+                    "defaultValue": "input<string>('Toggle')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "toggleTextPosition",
+                    "defaultValue": "input<'left' | 'right'>('right')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "handleKeyDown",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "KeyboardEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 21,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "KeyboardEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "toggleSwitch",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 17,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, input, signal } from '@angular/core';\n\n@Component({\n  selector: 'app-fx-ui-toggle-switch',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './fx-ui-toggle-switch.component.html',\n  styleUrl: './fx-ui-toggle-switch.component.scss',\n})\nexport class FxUiToggleSwitchComponent {\n  toggleInputId = input<string>('toggleInputId');\n  toggleSupportText = input<string>('Toggle');\n  toggleTextPosition = input<'left' | 'right'>('right');\n  togglePosition = signal<boolean>(false);\n\n  toggleSwitch(): void {\n    this.togglePosition.set(!this.togglePosition());\n  }\n\n  handleKeyDown(event: KeyboardEvent): void {\n    if (event.key === 'Enter' || event.key === ' ') {\n      event.preventDefault();\n      this.toggleSwitch();\n    }\n  }\n}\n",
+            "styleUrl": "./fx-ui-toggle-switch.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"fx-toggle\">\n  <span\n    *ngIf=\"toggleTextPosition() === 'left'\"\n    class=\"fx-toggle-text fx-toggle-text--left\"\n  >\n    {{ toggleSupportText() }}\n  </span>\n  <label class=\"fx-toggle-switch\">\n    <input\n      [name]=\"'fx_toggle_switch_' + toggleInputId()\"\n      [id]=\"toggleInputId()\"\n      type=\"checkbox\"\n      [checked]=\"togglePosition()\"\n      (change)=\"toggleSwitch()\"\n      (keydown)=\"handleKeyDown($event)\"\n      [attr.aria-checked]=\"togglePosition()\"\n      role=\"switch\"\n      tabindex=\"0\"\n    />\n    <span class=\"fx-toggle-slider\"></span>\n  </label>\n  <span\n    *ngIf=\"toggleTextPosition() === 'right'\"\n    class=\"fx-toggle-text fx-toggle-text--right\"\n  >\n    {{ toggleSupportText() }}\n  </span>\n</div>\n"
         },
         {
             "name": "UiLibComponent",
@@ -438,7 +799,7 @@
                 "name": "FxUiButtonType",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "\"submit\" | \"navigate\"",
+                "rawtype": "\"fill\" | \"outline\"",
                 "file": "src/app/ui-lib/atomic/atoms/fx-ui-button/fx-ui-button.component.type.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -524,7 +885,7 @@
                     "name": "FxUiButtonType",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "\"submit\" | \"navigate\"",
+                    "rawtype": "\"fill\" | \"outline\"",
                     "file": "src/app/ui-lib/atomic/atoms/fx-ui-button/fx-ui-button.component.type.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -559,12 +920,57 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/ui-lib/atomic/atoms/form-elements/fx-ui-input-checkbox/fx-ui-input-checkbox.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FxUiInputCheckboxComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui-lib/atomic/atoms/form-elements/fx-ui-input-radio/fx-ui-input-radio.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FxUiInputRadioComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui-lib/atomic/atoms/form-elements/fx-ui-input-text/fx-ui-input-text.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FxUiInputTextComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/ui-lib/atomic/atoms/fx-ui-button/fx-ui-button.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "FxUiButtonComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/21",
+                "coverageCount": "0/22",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui-lib/atomic/molecules/form-elements/fx-ui-standard-form/fx-ui-standard-form.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FxUiStandardFormComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui-lib/atomic/molecules/fx-ui-toggle-switch/fx-ui-toggle-switch.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FxUiToggleSwitchComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {

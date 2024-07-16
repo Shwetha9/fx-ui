@@ -1,0 +1,30 @@
+<div [ngClass]="{ 'fx-toggle': true, 'fx-toggle-focused': isInputFocused() }">
+  <span
+    *ngIf="toggleTextPosition() === 'left'"
+    class="fx-toggle-text fx-toggle-text--left"
+  >
+    {{ toggleSupportText() }}
+  </span>
+  <label class="fx-toggle-switch">
+    <input
+      [name]="'fx_toggle_switch_' + toggleInputId()"
+      [id]="toggleInputId()"
+      type="checkbox"
+      [checked]="togglePosition()"
+      (focus)="onInputFocus()"
+      (change)="toggleSwitch()"
+      (blur)="onInputBlur()"
+      (keydown)="handleKeyDown($event)"
+      [attr.aria-checked]="togglePosition()"
+      role="switch"
+      tabindex="0"
+    />
+    <span class="fx-toggle-slider"></span>
+  </label>
+  <span
+    *ngIf="toggleTextPosition() === 'right'"
+    class="fx-toggle-text fx-toggle-text--right"
+  >
+    {{ toggleSupportText() }}
+  </span>
+</div>
