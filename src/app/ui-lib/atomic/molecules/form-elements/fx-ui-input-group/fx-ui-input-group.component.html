@@ -1,0 +1,24 @@
+<form class="fx-ui-input-group">
+  <label [for]="getComputedLabelProps()">{{ inputLabel() }}</label>
+  @if (inputType() === "text") {
+    <input
+      type="text"
+      [id]="getComputedLabelProps()"
+      [name]="getComputedLabelProps()"
+    />
+  }
+  @if (inputType() === "radio") {
+    <input
+      type="radio"
+      [id]="getComputedLabelProps()"
+      [name]="getComputedLabelProps()"
+    />
+  }
+  @if (inputType() === "checkbox") {
+    <input
+      type="checkbox"
+      [id]="getComputedLabelProps()"
+      [name]="getComputedLabelProps()"
+    />
+  }
+</form>

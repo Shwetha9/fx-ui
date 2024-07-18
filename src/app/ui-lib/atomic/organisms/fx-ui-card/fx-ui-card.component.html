@@ -1,0 +1,24 @@
+<div class="fx-ui-card">
+  <div class="fx-ui-card-image">
+    <img [src]="cardImage()" [alt]="cardImgAltText()" />
+  </div>
+  <div class="fx-ui-card-body">
+    <h2>{{ cardTitle() }}</h2>
+    <div [innerHtml]="cardDescription()"></div>
+  </div>
+  <div class="fx-ui-card-footer">
+    @if (cardFooter()?.footerRichText) {
+      <div
+        class="fx-ui-card-footer-text"
+        [innerHtml]="cardFooter()?.footerRichText"
+      ></div>
+    }
+    @if (cardFooter()?.footerButton) {
+      <app-fx-ui-button
+        [color]="'primary'"
+        [label]="'Find out more'"
+        [size]="'small'"
+      ></app-fx-ui-button>
+    }
+  </div>
+</div>

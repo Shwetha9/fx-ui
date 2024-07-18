@@ -559,7 +559,7 @@
         },
         {
             "name": "FxUiToggleSwitchComponent",
-            "id": "component-FxUiToggleSwitchComponent-ed6c3e983c32b432943698cb30ef764abbb916ab6b7d9c0c7ff6e0cbde0b48ffa3ed285046bfb5340f70585f3f26033b8aaa73da7b9c95c16c4d97e2741fe381",
+            "id": "component-FxUiToggleSwitchComponent-27a6317836dd07b325e0399fdf49edf01e0e0799a3236565dd41a06a7ae630962d640ff616ee7e306968fcb985933797ace4d7b9272465bf75a93efe684dc7c6",
             "file": "src/app/ui-lib/atomic/molecules/fx-ui-toggle-switch/fx-ui-toggle-switch.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -577,6 +577,16 @@
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [
+                {
+                    "name": "isInputFocused",
+                    "defaultValue": "signal<boolean>(false)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                },
                 {
                     "name": "toggleInputId",
                     "defaultValue": "input<string>('toggleInputId')",
@@ -632,7 +642,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 21,
+                    "line": 22,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -648,12 +658,32 @@
                     ]
                 },
                 {
+                    "name": "onInputBlur",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 32,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onInputFocus",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 28,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
                     "name": "toggleSwitch",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 17,
+                    "line": 18,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -672,13 +702,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, input, signal } from '@angular/core';\n\n@Component({\n  selector: 'app-fx-ui-toggle-switch',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './fx-ui-toggle-switch.component.html',\n  styleUrl: './fx-ui-toggle-switch.component.scss',\n})\nexport class FxUiToggleSwitchComponent {\n  toggleInputId = input<string>('toggleInputId');\n  toggleSupportText = input<string>('Toggle');\n  toggleTextPosition = input<'left' | 'right'>('right');\n  togglePosition = signal<boolean>(false);\n\n  toggleSwitch(): void {\n    this.togglePosition.set(!this.togglePosition());\n  }\n\n  handleKeyDown(event: KeyboardEvent): void {\n    if (event.key === 'Enter' || event.key === ' ') {\n      event.preventDefault();\n      this.toggleSwitch();\n    }\n  }\n}\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, input, signal } from '@angular/core';\n\n@Component({\n  selector: 'app-fx-ui-toggle-switch',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './fx-ui-toggle-switch.component.html',\n  styleUrl: './fx-ui-toggle-switch.component.scss',\n})\nexport class FxUiToggleSwitchComponent {\n  toggleInputId = input<string>('toggleInputId');\n  toggleSupportText = input<string>('Toggle');\n  toggleTextPosition = input<'left' | 'right'>('right');\n  togglePosition = signal<boolean>(false);\n  isInputFocused = signal<boolean>(false);\n\n  toggleSwitch(): void {\n    this.togglePosition.set(!this.togglePosition());\n  }\n\n  handleKeyDown(event: KeyboardEvent): void {\n    if (event.key === 'Enter' || event.key === ' ') {\n      event.preventDefault();\n      this.toggleSwitch();\n    }\n  }\n  onInputFocus(): void {\n    this.isInputFocused.set(true);\n  }\n\n  onInputBlur(): void {\n    this.isInputFocused.set(false);\n  }\n}\n",
             "styleUrl": "./fx-ui-toggle-switch.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"fx-toggle\">\n  <span\n    *ngIf=\"toggleTextPosition() === 'left'\"\n    class=\"fx-toggle-text fx-toggle-text--left\"\n  >\n    {{ toggleSupportText() }}\n  </span>\n  <label class=\"fx-toggle-switch\">\n    <input\n      [name]=\"'fx_toggle_switch_' + toggleInputId()\"\n      [id]=\"toggleInputId()\"\n      type=\"checkbox\"\n      [checked]=\"togglePosition()\"\n      (change)=\"toggleSwitch()\"\n      (keydown)=\"handleKeyDown($event)\"\n      [attr.aria-checked]=\"togglePosition()\"\n      role=\"switch\"\n      tabindex=\"0\"\n    />\n    <span class=\"fx-toggle-slider\"></span>\n  </label>\n  <span\n    *ngIf=\"toggleTextPosition() === 'right'\"\n    class=\"fx-toggle-text fx-toggle-text--right\"\n  >\n    {{ toggleSupportText() }}\n  </span>\n</div>\n"
+            "templateData": "<div [ngClass]=\"{ 'fx-toggle': true, 'fx-toggle-focused': isInputFocused() }\">\n  <span\n    *ngIf=\"toggleTextPosition() === 'left'\"\n    class=\"fx-toggle-text fx-toggle-text--left\"\n  >\n    {{ toggleSupportText() }}\n  </span>\n  <label class=\"fx-toggle-switch\">\n    <input\n      [name]=\"'fx_toggle_switch_' + toggleInputId()\"\n      [id]=\"toggleInputId()\"\n      type=\"checkbox\"\n      [checked]=\"togglePosition()\"\n      (focus)=\"onInputFocus()\"\n      (change)=\"toggleSwitch()\"\n      (blur)=\"onInputBlur()\"\n      (keydown)=\"handleKeyDown($event)\"\n      [attr.aria-checked]=\"togglePosition()\"\n      role=\"switch\"\n      tabindex=\"0\"\n    />\n    <span class=\"fx-toggle-slider\"></span>\n  </label>\n  <span\n    *ngIf=\"toggleTextPosition() === 'right'\"\n    class=\"fx-toggle-text fx-toggle-text--right\"\n  >\n    {{ toggleSupportText() }}\n  </span>\n</div>\n"
         },
         {
             "name": "UiLibComponent",
@@ -970,7 +1000,7 @@
                 "linktype": "component",
                 "name": "FxUiToggleSwitchComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {
