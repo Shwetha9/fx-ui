@@ -1,0 +1,19 @@
+@use "../functions/px-to-rem.scss" as *;
+
+$font-size-xs: px-to-rem(12);
+$font-size-base: px-to-rem(16);
+$font-size-sm: px-to-rem(18);
+$font-size-md: px-to-rem(32);
+$font-size-lg: px-to-rem(48);
+$font-size-xl: px-to-rem(64);
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+$line-height-base: 1.25;
+$line-height-lg: 1.5;
+
+$letter-spacing-base: 0.5px;
+
+$font-family-base: "Open Sans", sans-serif;

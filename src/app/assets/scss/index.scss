@@ -1,1 +1,6 @@
-@import './variables';
+@use "../scss/common/forms" as *;
+@use "../scss/generators/button-classes" as *;
+@use "../scss/generators/container" as *;
+@import "./variables";
+@import "../scss/generators/spacings";
+@import "../scss/common/typography";

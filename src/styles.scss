@@ -1,64 +1,99 @@
 /* You can add global styles to this file, and also import other style files */
 .material-symbols-outlined {
-    font-family: "Material Symbols Outlined";
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px; /* Preferred icon size */
-    display: inline-block;
-    line-height: 1;
-    text-transform: none;
-    letter-spacing: normal;
-    word-wrap: normal;
-    white-space: nowrap;
-    direction: ltr;
-  }
-  
-  @font-face {
-    font-family: "Material Symbols Outlined";
-    font-style: normal;
-    src: url('./app/assets/fonts/MaterialSymbolsOutlined.woff2') format("woff");
-  }
-  
-  body,
-  html,
-  div,
-  button,
-  p,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  a,
-  span,
-  input,
-  label,
-  select,
-  option,
-  textarea,
-  ul,
-  li,
-  ol,
-  dl,
-  dt,
-  dd,
-  table,
-  th,
-  td,
-  form,
-  fieldset,
-  legend,
-  caption,
-  article,
-  aside,
-  footer,
-  header,
-  nav,
-  section,
-  main {
-    font-family: "Open Sans", sans-serif;
-    letter-spacing:0.5px;
-    font-weight: 300;
-  }
-  
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  src: url("./app/assets/fonts/MaterialSymbolsOutlined.woff2") format("woff");
+}
+
+body,
+html,
+div,
+button,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+span,
+input,
+label,
+select,
+option,
+textarea,
+ul,
+li,
+ol,
+dl,
+dt,
+dd,
+table,
+th,
+td,
+form,
+fieldset,
+legend,
+caption,
+article,
+aside,
+footer,
+header,
+nav,
+section,
+main {
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 0.5px;
+  font-weight: 300;
+  line-height: 1.25;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #e0e0e0;
+  margin: 0.5rem 0;
+}
+
+// helper-classes
+
+.list-style-none {
+  list-style-type: none;
+}
+
+.margin-none {
+  margin: 0;
+}
+
+.padding-none {
+  padding: 0;
+}

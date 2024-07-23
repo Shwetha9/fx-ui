@@ -1,0 +1,28 @@
+@use '../functions/px-to-rem.scss' as *;
+// Breakpoints
+// -----------
+// Breakpoints for responsive design, aligning with common device sizes. This can also be device specific depending on business needs.
+
+$breakpoint-xs: px-to-rem(320); // Extra small devices (portrait phones).
+$breakpoint-sm: px-to-rem(640); // Small devices (landscape phones).
+$breakpoint-md: px-to-rem(1024); // Medium devices (tablets).
+$breakpoint-lg: px-to-rem(1280); // Large devices (desktops).
+$breakpoint-xl: px-to-rem(2560); // Extra large devices (large desktops).
+
+$bp-map: (
+  'xs': (
+    min-width: #{$breakpoint-xs},
+  ),
+  'small': (
+    min-width: #{$breakpoint-sm},
+  ),
+  'medium': (
+    min-width: #{$breakpoint-md},
+  ),
+  'large': (
+    min-width: #{$breakpoint-lg},
+  ),
+  'xd': (
+    min-width: #{$breakpoint-xl},
+  ),
+) !default;

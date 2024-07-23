@@ -1,0 +1,33 @@
+@use '../variables/breakpoints' as bp;
+@use '../functions/px-to-rem.scss' as *;
+
+// Generate container max widths for breakpoints
+$container-breakpoints: (
+  'xs': (
+    min-width: #{bp.$breakpoint-xs},
+  ),
+  'small': (
+    min-width: #{bp.$breakpoint-sm},
+  ),
+  'medium': (
+    min-width: #{bp.$breakpoint-md},
+  ),
+  'large': (
+    min-width: #{bp.$breakpoint-lg},
+  ),
+) !default;
+
+@each $breakpoint, $value in $container-breakpoints {
+  $size: map-get($value, min-width);
+
+  @media (min-width: #{$size}) {
+    .container {
+      width: $size; // Apply the max-width from the breakpoint
+      max-width: 100%;
+      padding-right: px-to-rem(12);
+      padding-left: px-to-rem(12);
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+}

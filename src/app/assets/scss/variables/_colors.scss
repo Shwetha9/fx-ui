@@ -1,0 +1,26 @@
+// Color Palette
+// -------------
+// Base colors used throughout the application. These include primary, secondary, and accent colors along with neutrals.
+
+$color-primary: #242430; // Primary brand color for links, buttons, etc.
+$color-secondary: #df5e5e; // Secondary color for complementary elements.
+$color-success: #4a9d3d; // Color for success messages and icons.
+$color-info: #4b6077; // Color for informational messages and icons.
+$color-warning: #d1732f; // Color for warnings and cautionary elements.
+$color-danger: #ce3c4b; // Color for error messages and icons.
+$color-light: #f8f9fa; // Light background color for elements.
+$color-dark: #272728; // Dark color for text and certain backgrounds.
+
+$theme-colors: () !default;
+
+$theme-colors: map-merge(
+  (
+    'primary': $color-primary,
+    'secondary': $color-secondary,
+    'success': $color-success,
+    'info': $color-info,
+    'warning': $color-warning,
+    'danger': $color-danger,
+  ),
+  $theme-colors
+);

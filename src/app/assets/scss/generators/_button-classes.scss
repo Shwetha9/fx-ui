@@ -1,0 +1,48 @@
+@use '../variables/colors' as *;
+@use '../functions/px-to-rem.scss' as *;
+
+@mixin button-variant($background, $isBorderVariant: false, $isDarkBackground: true) {
+  // Default color for dark background
+  $text-color: $color-light;
+
+  // Check if the background is light
+  @if not $isDarkBackground {
+    $text-color: $color-dark; // Change text color for dark backgrounds
+  }
+  appearance: none;
+  color: $text-color;
+  background-color: $background;
+  border: none;
+  border-radius: px-to-rem(4);
+  padding: px-to-rem(15) px-to-rem(38);
+  cursor: pointer;
+
+  &:hover {
+    background-color: lighten($background, 15%);
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  &:focus,
+  &.focus {
+    outline: 2px solid lighten($background, 10%);
+    outline-offset: 1px;
+  }
+
+  // Disabled comes first so active can properly restyle
+  &.disabled,
+  &:disabled {
+    background-color: lighten($background, 0.85);
+  }
+
+  @if not isBorderVariant {
+    background-color: transparent;
+    border-color: $background;
+    color: $background;
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .btn-#{$color} {
+    @include button-variant($value, false, true);
+  }
+}

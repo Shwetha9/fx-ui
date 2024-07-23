@@ -1,0 +1,5 @@
+@use '../functions/px-to-rem.scss' as *;
+
+@mixin text-max-width($value: 100%) {
+  max-width: px-to-rem($value);
+}

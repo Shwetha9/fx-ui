@@ -1,0 +1,13 @@
+// Function to convert px to rem
+// @param $size: The pixel value to convert
+// @param $base-font-size: The base font size in pixels for the root html element (default is 16px)
+// @return The calculated rem value
+
+@function px-to-rem($size, $base-font-size: 16) {
+  @return calc($size / $base-font-size) * 1rem;
+}
+
+// Example usage
+// .your-class {
+//   font-size: px-to-rem(32); // Outputs: font-size: 1rem;
+// }

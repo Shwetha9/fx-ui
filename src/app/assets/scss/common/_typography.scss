@@ -1,0 +1,35 @@
+@use "../generators/media-queries" as *;
+@use "../variables/typography" as ty;
+@use "../functions/px-to-rem.scss" as *;
+h1 {
+  font-size: ty.$font-size-md;
+  line-height: 1.25;
+}
+
+p {
+  font-size: ty.$font-size-base;
+  line-height: 1.2;
+}
+
+@include breakpoint("small") {
+  h1 {
+    font-size: ty.$font-size-lg;
+  }
+
+  h2 {
+    font-size: ty.$font-size-md;
+  }
+
+  h3 {
+    font-size: ty.$font-size-sm;
+  }
+
+  h4 {
+    font-size: ty.$font-size-base;
+  }
+
+  h5,
+  h6 {
+    font-size: ty.$font-size-xs;
+  }
+}

@@ -1,0 +1,101 @@
+@use "../variables/breakpoints" as bp;
+@use "../functions/px-to-rem.scss" as *;
+
+// Define your breakpoints and corresponding margin values
+$spacing-breakpoints: (
+  "none": (
+    "320px": 0,
+    "1960px": 0,
+  ),
+  "xs": (
+    "320px": 8,
+    "1960px": 16,
+  ),
+  "sm": (
+    "320px": 8,
+    "1960px": 16,
+  ),
+  "md": (
+    "320px": 8,
+    "1960px": 24,
+  ),
+  "lg": (
+    "320px": 16,
+    "1960px": 32,
+  ),
+  "xl": (
+    "320px": 16,
+    "1960px": 42,
+  ),
+) !default;
+
+// Generate margin classes
+@mixin generate-margin-classes {
+  $directions: ("top", "btm", "left", "right", "v");
+
+  @each $breakpoint, $values in $spacing-breakpoints {
+    @each $size, $margin in $values {
+      @media only screen and (min-width: #{$size}) {
+        @each $direction in $directions {
+          .margin-#{$direction}-#{$breakpoint} {
+            @include apply-margin($direction, $margin);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Apply margin based on direction and value
+@mixin apply-margin($direction, $margin) {
+  @if $direction == "top" {
+    margin-top: px-to-rem($margin);
+  } @else if $direction == "btm" {
+    margin-bottom: px-to-rem($margin);
+  } @else if $direction == "left" {
+    margin-left: px-to-rem($margin);
+  } @else if $direction == "right" {
+    margin-right: px-to-rem($margin);
+  } @else if $direction == "v" {
+    margin-top: px-to-rem($margin);
+    margin-bottom: px-to-rem($margin);
+  }
+}
+// Generate padding classes
+@mixin generate-padding-classes {
+  $directions: ("top", "btm", "left", "right", "v", "h");
+  @each $breakpoint, $values in $spacing-breakpoints {
+    @each $size, $margin in $values {
+      @media only screen and (min-width: #{$size}) {
+        @each $direction in $directions {
+          .padding-#{$direction}-#{$breakpoint} {
+            @include apply-margin($direction, $margin);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Apply padding based on direction and value
+@mixin apply-margin($direction, $margin) {
+  @if $direction == "top" {
+    padding-top: px-to-rem($margin);
+  } @else if $direction == "btm" {
+    padding-bottom: px-to-rem($margin);
+  } @else if $direction == "left" {
+    padding-left: px-to-rem($margin);
+  } @else if $direction == "right" {
+    padding-right: px-to-rem($margin);
+  } @else if $direction == "v" {
+    padding-top: px-to-rem($margin);
+    padding-bottom: px-to-rem($margin);
+  } @else if $direction == "h" {
+    padding-left: px-to-rem($margin);
+    padding-right: px-to-rem($margin);
+  }
+}
+
+// Include the mixin to generate the classes
+@include generate-margin-classes;
+@include generate-padding-classes;
