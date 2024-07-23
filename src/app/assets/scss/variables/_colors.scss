@@ -15,12 +15,12 @@ $theme-colors: () !default;
 
 $theme-colors: map-merge(
   (
-    'primary': $color-primary,
-    'secondary': $color-secondary,
-    'success': $color-success,
-    'info': $color-info,
-    'warning': $color-warning,
-    'danger': $color-danger,
+    "primary": $color-primary,
+    "secondary": $color-secondary,
+    "success": $color-success,
+    "info": $color-info,
+    "warning": $color-warning,
+    "danger": $color-danger,
   ),
   $theme-colors
 );

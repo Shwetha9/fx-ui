@@ -1,10 +1,13 @@
 <form class="fx-ui-input-group">
-  <label [for]="getComputedLabelProps()">{{ inputLabel() }}</label>
+  <label [for]="getComputedLabelProps()" class="fx-ui-input-label">
+    {{ inputLabel() }}
+  </label>
   @if (inputType() === "text") {
     <input
       type="text"
       [id]="getComputedLabelProps()"
       [name]="getComputedLabelProps()"
+      class="fx-ui-input-text"
     />
   }
   @if (inputType() === "radio") {
@@ -12,6 +15,7 @@
       type="radio"
       [id]="getComputedLabelProps()"
       [name]="getComputedLabelProps()"
+      class="fx-ui-input-radio"
     />
   }
   @if (inputType() === "checkbox") {
@@ -19,6 +23,7 @@
       type="checkbox"
       [id]="getComputedLabelProps()"
       [name]="getComputedLabelProps()"
+      class="fx-ui-input-checkbox"
     />
   }
 </form>

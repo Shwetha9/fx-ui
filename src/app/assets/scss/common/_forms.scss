@@ -1,20 +1,6 @@
-@use '../functions/px-to-rem.scss' as *;
-@use '../variables/colors' as *;
+@use "../functions/px-to-rem.scss" as *;
+@use "../variables/colors" as *;
 
 label {
   display: block;
-}
-
-input {
-  width: 100%;
-  min-height: px-to-rem(48);
-  border: 1px solid #ccc;
-  margin: px-to-rem(12) 0;
-  border-radius: px-to-rem(4);
-  padding: px-to-rem(10);
-  &:focus,
-  &.focus {
-    outline: 2px solid lighten($color-primary, 55%);
-    outline-offset: 1px;
-  }
 }

@@ -1,0 +1,29 @@
+@use "../../../../../assets/scss/variables/typography" as *;
+@use "../../../../../assets/scss/variables" as *;
+.fx-ui-input {
+  &-group {
+    display: flex;
+    align-items: center;
+  }
+  &-label {
+    margin-right: 10px;
+    font-size: $font-size-sm;
+  }
+  &-radio,
+  &-checkbox {
+    height: 20px;
+    width: 20px;
+  }
+
+  &-text {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid $grey-300;
+    border-radius: 5px;
+    font-size: $font-size-sm;
+    &:focus {
+      outline: none;
+      border: 1px solid $primary;
+    }
+  }
+}
