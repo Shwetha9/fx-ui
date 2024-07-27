@@ -29,7 +29,12 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss", "src/app/assets/scss/index.scss"],
+            "styles": [
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/primeicons/primeicons.css",
+              "src/styles.scss"
+            ],
             "stylePreprocessorOptions": {
               "includePaths": ["src/app/scss"]
             },
