@@ -527,7 +527,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<form class=\"fx-ui-input-group\">\n  <label [for]=\"getComputedLabelProps()\" class=\"fx-ui-input-label\">\n    {{ inputLabel() }}\n  </label>\n  @if (inputType() === \"text\") {\n    <input\n      type=\"text\"\n      [id]=\"getComputedLabelProps()\"\n      [name]=\"getComputedLabelProps()\"\n      class=\"fx-ui-input-text\"\n    />\n  }\n  @if (inputType() === \"radio\") {\n    <input\n      type=\"radio\"\n      [id]=\"getComputedLabelProps()\"\n      [name]=\"getComputedLabelProps()\"\n      class=\"fx-ui-input-radio\"\n    />\n  }\n  @if (inputType() === \"checkbox\") {\n    <input\n      type=\"checkbox\"\n      [id]=\"getComputedLabelProps()\"\n      [name]=\"getComputedLabelProps()\"\n      class=\"fx-ui-input-checkbox\"\n    />\n  }\n</form>\n"
+            "templateData": "<div class=\"fx-ui-input\">\n  <form class=\"fx-ui-input-group\">\n    <label [for]=\"getComputedLabelProps()\" class=\"fx-ui-input-label\">\n      {{ inputLabel() }}\n    </label>\n    @if (inputType() === \"text\") {\n      <input\n        type=\"text\"\n        [id]=\"getComputedLabelProps()\"\n        [name]=\"getComputedLabelProps()\"\n        class=\"fx-ui-input-text\"\n      />\n    }\n    @if (inputType() === \"radio\") {\n      <input\n        type=\"radio\"\n        [id]=\"getComputedLabelProps()\"\n        [name]=\"getComputedLabelProps()\"\n        class=\"fx-ui-input-radio\"\n      />\n    }\n    @if (inputType() === \"checkbox\") {\n      <input\n        type=\"checkbox\"\n        [id]=\"getComputedLabelProps()\"\n        [name]=\"getComputedLabelProps()\"\n        class=\"fx-ui-input-checkbox\"\n      />\n    }\n  </form>\n</div>\n"
         },
         {
             "name": "FxUiInputRadioComponent",
@@ -692,7 +692,7 @@
         },
         {
             "name": "FxUiStandardFormComponent",
-            "id": "component-FxUiStandardFormComponent-be331a0d7758a0e1d175223220a89b7f",
+            "id": "component-FxUiStandardFormComponent-8f9d23fb2c8dcbf594840fef11f3313b",
             "file": "src/app/ui-lib/atomic/molecules/form-elements/fx-ui-standard-form/fx-ui-standard-form.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -709,18 +709,7 @@
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 15,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
+            "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -728,15 +717,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, type OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-fx-ui-standard-form',\n  standalone: true,\n  imports: [\n    CommonModule,\n  ],\n  templateUrl: './fx-ui-standard-form.component.html',\n  styleUrl: './fx-ui-standard-form.component.scss',\n})\nexport class FxUiStandardFormComponent implements OnInit {\n\n  ngOnInit(): void { }\n\n}\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, type OnInit } from '@angular/core';\nimport { FxUiInputGroupComponent } from '../fx-ui-input-group/fx-ui-input-group.component';\n\n@Component({\n  selector: 'app-fx-ui-standard-form',\n  standalone: true,\n  imports: [CommonModule, FxUiInputGroupComponent],\n  templateUrl: './fx-ui-standard-form.component.html',\n  styleUrl: './fx-ui-standard-form.component.scss',\n})\nexport class FxUiStandardFormComponent {}\n",
             "styleUrl": "./fx-ui-standard-form.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<p>fx-ui-standard-form works!</p>,\n"
+            "templateData": "<section class=\"fx-ui-form\">\n  <h2>Welcome to onboarding</h2>\n  <p>\n    Just a few steps and you will be well on your way to being our valued\n    customer (or something less cheesy)!\n  </p>\n  <form>\n    <app-fx-ui-input-group\n      [inputLabel]=\"'Please enter your first name'\"\n      [inputType]=\"'text'\"\n    >\n    </app-fx-ui-input-group>\n    <app-fx-ui-input-group\n      [inputLabel]=\"'Please enter your last name'\"\n      [inputType]=\"'text'\"\n    >\n    </app-fx-ui-input-group>\n    <app-fx-ui-input-group\n      [inputLabel]=\"'Please enter your email address'\"\n      [inputType]=\"'text'\"\n    >\n    </app-fx-ui-input-group>\n    <app-fx-ui-input-group\n      [inputLabel]=\"'I would like to use promo code'\"\n      [inputType]=\"'radio'\"\n    >\n    </app-fx-ui-input-group>\n    <app-fx-ui-input-group\n      [inputLabel]=\"'Please enter your promo code'\"\n      [inputType]=\"'text'\"\n    >\n    </app-fx-ui-input-group>\n  </form>\n  <hr />\n  <form>\n    <app-fx-ui-input-group\n      [inputLabel]=\"\n        'So we can give you the best deals with books, please select your favourite genre'\n      \"\n      [inputType]=\"'text'\"\n    >\n    </app-fx-ui-input-group>\n  </form>\n</section>\n"
         },
         {
             "name": "FxUiToggleSwitchComponent",
@@ -1251,7 +1237,7 @@
                 "linktype": "component",
                 "name": "FxUiStandardFormComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
