@@ -3,7 +3,7 @@
     "interfaces": [
         {
             "name": "CardFooter",
-            "id": "interface-CardFooter-0bdb78968be37fd29a6b720770e3395872cd25b0133c997394a72186cb2da1871262d726f5255e0bda71cb6dd78fd07f313dfae7baba56c1baf70c48a6bea295",
+            "id": "interface-CardFooter-d02445554f016b441ecacd26126ec04a",
             "file": "src/app/ui-lib/atomic/organisms/fx-ui-card/fx-ui-card.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -30,9 +30,8 @@
                 }
             ],
             "indexSignatures": [],
-            "kind": 171,
-            "methods": [],
-            "extends": []
+            "kind": 150,
+            "methods": []
         }
     ],
     "injectables": [],
@@ -43,7 +42,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-1495b398c1f5408dd3c0641038bdbd31d7e2cc68f9c12b502e9756b6beb5762340983817c51d1fcfba79b69261074708e311e17b08d6c8539c2000ed927db0fc",
+            "id": "component-AppComponent-742723d43088ff4c69fef2f011263abd",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -57,7 +56,6 @@
                 "./app.component.html"
             ],
             "viewProviders": [],
-            "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [
@@ -77,26 +75,19 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "RouterOutlet"
-                }
-            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { RouterOutlet } from '@angular/router';\n\n@Component({\n  selector: 'app-root',\n  standalone: true,\n  imports: [RouterOutlet],\n  templateUrl: './app.component.html',\n  styleUrl: './app.component.scss'\n})\nexport class AppComponent {\n  title = 'ng-experiments';\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { RouterOutlet } from '@angular/router';\n\n@Component({\n  selector: 'app-root',\n  standalone: true,\n  imports: [RouterOutlet],\n  templateUrl: './app.component.html',\n  styleUrl: './app.component.scss',\n})\nexport class AppComponent {\n  title = 'ng-experiments';\n}\n",
             "styleUrl": "./app.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
             "templateData": "<main class=\"ng-experiments\"></main>\n\n<router-outlet />\n"
         },
         {
             "name": "FxUiButtonComponent",
-            "id": "component-FxUiButtonComponent-ebcbd3c6ef5b57e208ba07fad24e1308ff4e138560cf203508e190115933e7d363f8888185da367728ba81ea8b736d61012f7e24c9686346832780cb8b8e0d22",
+            "id": "component-FxUiButtonComponent-bbfdcef0fa2ef5142f143f141b57e374",
             "file": "src/app/ui-lib/atomic/atoms/fx-ui-button/fx-ui-button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -112,81 +103,18 @@
                 "./fx-ui-button.component.html"
             ],
             "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [
-                {
-                    "name": "icon",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 29,
-                    "required": false
-                },
-                {
-                    "name": "iconPosition",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 24,
-                    "required": false
-                },
-                {
-                    "name": "label",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 26,
-                    "required": true
-                },
-                {
-                    "name": "shape",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 23,
-                    "required": false
-                },
-                {
-                    "name": "state",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 25,
-                    "required": false
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "buttonClickEvent",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 27,
-                    "required": false
-                }
-            ],
+            "inputsClass": [],
+            "outputsClass": [],
             "propertiesClass": [
                 {
                     "name": "buttonClickEvent",
+                    "defaultValue": "output<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 27,
-                    "required": false
+                    "line": 27
                 },
                 {
                     "name": "classModifiers",
@@ -210,23 +138,23 @@
                 },
                 {
                     "name": "icon",
+                    "defaultValue": "input<string>()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 29,
-                    "required": false
+                    "line": 29
                 },
                 {
                     "name": "iconPosition",
+                    "defaultValue": "input<FxUiButtonIconPosition>()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 24,
-                    "required": false
+                    "line": 24
                 },
                 {
                     "name": "isDisabled",
@@ -238,28 +166,28 @@
                     "description": "",
                     "line": 55,
                     "modifierKind": [
-                        148
+                        132
                     ]
                 },
                 {
                     "name": "label",
+                    "defaultValue": "input.required<string>()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 26,
-                    "required": true
+                    "line": 26
                 },
                 {
                     "name": "shape",
+                    "defaultValue": "input<FxUiButtonShape>()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 23,
-                    "required": false
+                    "line": 23
                 },
                 {
                     "name": "size",
@@ -273,13 +201,13 @@
                 },
                 {
                     "name": "state",
+                    "defaultValue": "input<FxUiButtonState>()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 25,
-                    "required": false
+                    "line": 25
                 },
                 {
                     "name": "type",
@@ -338,13 +266,6 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "CommonModule",
-                    "type": "module"
-                }
-            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
@@ -357,7 +278,6 @@
                 }
             ],
             "stylesData": "",
-            "extends": [],
             "implements": [
                 "OnInit"
             ],
@@ -365,7 +285,7 @@
         },
         {
             "name": "FxUiCardComponent",
-            "id": "component-FxUiCardComponent-0bdb78968be37fd29a6b720770e3395872cd25b0133c997394a72186cb2da1871262d726f5255e0bda71cb6dd78fd07f313dfae7baba56c1baf70c48a6bea295",
+            "id": "component-FxUiCardComponent-d02445554f016b441ecacd26126ec04a",
             "file": "src/app/ui-lib/atomic/organisms/fx-ui-card/fx-ui-card.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -379,110 +299,58 @@
                 "./fx-ui-card.component.html"
             ],
             "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [
-                {
-                    "name": "cardDescription",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 17,
-                    "required": true
-                },
-                {
-                    "name": "cardFooter",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 20,
-                    "required": false
-                },
-                {
-                    "name": "cardImage",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 18,
-                    "required": false
-                },
-                {
-                    "name": "cardImgAltText",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 19,
-                    "required": false
-                },
-                {
-                    "name": "cardTitle",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 16,
-                    "required": true
-                }
-            ],
+            "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [
                 {
                     "name": "cardDescription",
+                    "defaultValue": "input.required<string>()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 17,
-                    "required": true
+                    "line": 17
                 },
                 {
                     "name": "cardFooter",
+                    "defaultValue": "input<CardFooter>()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 20,
-                    "required": false
+                    "line": 20
                 },
                 {
                     "name": "cardImage",
+                    "defaultValue": "input<string>()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 18,
-                    "required": false
+                    "line": 18
                 },
                 {
                     "name": "cardImgAltText",
+                    "defaultValue": "input<string>()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 19,
-                    "required": false
+                    "line": 19
                 },
                 {
                     "name": "cardTitle",
+                    "defaultValue": "input.required<string>()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 16,
-                    "required": true
+                    "line": 16
                 }
             ],
             "methodsClass": [
@@ -501,17 +369,6 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "CommonModule",
-                    "type": "module"
-                },
-                {
-                    "name": "FxUiButtonComponent",
-                    "type": "component"
-                }
-            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
@@ -520,7 +377,6 @@
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
             "implements": [
                 "OnInit"
             ],
@@ -528,7 +384,7 @@
         },
         {
             "name": "FxUiInputCheckboxComponent",
-            "id": "component-FxUiInputCheckboxComponent-34372a0045ec14e099fcfc4189a4f76fa23e6ed2a75df6cf6e5cd36c80b374eb5251264428484e3717299932fab0ebeb0db50cbab38c0b31b7caae8602034ed2",
+            "id": "component-FxUiInputCheckboxComponent-6125acd468b8938b0b6e85318f56487f",
             "file": "src/app/ui-lib/atomic/atoms/form-elements/fx-ui-input-checkbox/fx-ui-input-checkbox.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -542,7 +398,6 @@
                 "./fx-ui-input-checkbox.component.html"
             ],
             "viewProviders": [],
-            "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [],
@@ -562,13 +417,6 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "CommonModule",
-                    "type": "module"
-                }
-            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
@@ -577,7 +425,6 @@
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
             "implements": [
                 "OnInit"
             ],
@@ -585,7 +432,7 @@
         },
         {
             "name": "FxUiInputGroupComponent",
-            "id": "component-FxUiInputGroupComponent-8d60148de79d05544e289cc74b2d6c5474a207cb9e3e12a866675f4e0f1c5755c36c305b64ed5ca8ebfb43048d80c4194a454bad9f6915e16ce0a3b6ace2dd72",
+            "id": "component-FxUiInputGroupComponent-425eb3b345898746c6c125bcf814750b",
             "file": "src/app/ui-lib/atomic/molecules/form-elements/fx-ui-input-group/fx-ui-input-group.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -599,7 +446,6 @@
                 "./fx-ui-input-group.component.html"
             ],
             "viewProviders": [],
-            "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [
@@ -670,13 +516,6 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "CommonModule",
-                    "type": "module"
-                }
-            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
@@ -685,7 +524,6 @@
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
             "implements": [
                 "OnInit"
             ],
@@ -693,7 +531,7 @@
         },
         {
             "name": "FxUiInputRadioComponent",
-            "id": "component-FxUiInputRadioComponent-05e31b946a8091065dc1b4460d92792be848d3f3fdeabf22387ddeccac8e5e139d5902e425d0dc499982c2dfe6f02d73053ab653662cdb1b4b14307a4784d690",
+            "id": "component-FxUiInputRadioComponent-2d35e0b929d699e9483f64de5ad0521a",
             "file": "src/app/ui-lib/atomic/atoms/form-elements/fx-ui-input-radio/fx-ui-input-radio.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -707,7 +545,6 @@
                 "./fx-ui-input-radio.component.html"
             ],
             "viewProviders": [],
-            "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [],
@@ -727,13 +564,6 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "CommonModule",
-                    "type": "module"
-                }
-            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
@@ -742,7 +572,6 @@
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
             "implements": [
                 "OnInit"
             ],
@@ -750,7 +579,7 @@
         },
         {
             "name": "FxUiInputTextComponent",
-            "id": "component-FxUiInputTextComponent-911774afea1ce9b9414746c3b3763c7805c36ee25fefeedb4ec7f9416a6e9d92ac5af998fd1e731ee82ec550299dcd6be670f3ab4f63892db2a7d58f60621d75",
+            "id": "component-FxUiInputTextComponent-c19eb59480ea8ac1303e78ca0f898ad1",
             "file": "src/app/ui-lib/atomic/atoms/form-elements/fx-ui-input-text/fx-ui-input-text.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -764,7 +593,6 @@
                 "./fx-ui-input-text.component.html"
             ],
             "viewProviders": [],
-            "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [],
@@ -784,13 +612,6 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "CommonModule",
-                    "type": "module"
-                }
-            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
@@ -799,7 +620,6 @@
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
             "implements": [
                 "OnInit"
             ],
@@ -807,7 +627,7 @@
         },
         {
             "name": "FxUiRichTextComponent",
-            "id": "component-FxUiRichTextComponent-64807bb5babc0665c8d9dfc4170c9d04d341b6093e46bf722b096a7b7fa5cb2e2bc106a7af6ced0e6960f59dc679096ef789993acf1e2cb447ca48929d6d43d8",
+            "id": "component-FxUiRichTextComponent-fa9fb596eb57a9e982ad516b48cf61dc",
             "file": "src/app/ui-lib/atomic/atoms/fx-ui-rich-text/fx-ui-rich-text.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -821,7 +641,6 @@
                 "./fx-ui-rich-text.component.html"
             ],
             "viewProviders": [],
-            "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [
@@ -861,13 +680,6 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "CommonModule",
-                    "type": "module"
-                }
-            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
@@ -876,12 +688,11 @@
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
             "templateData": "<section class=\"fx-rich-text\" *ngIf=\"richText()\">\n  <div [innerHTML]=\"richtextSanitized()\" class=\"fx-rich-text-content\"></div>\n</section>\n"
         },
         {
             "name": "FxUiStandardFormComponent",
-            "id": "component-FxUiStandardFormComponent-516a63974107ab1c4dd34c9328e15d389c52609468625e8ae1ceda8a3819dc49576e457902dbe3ccc715290109f7fa3510435d25ee2ac465c70f8b8e1325f644",
+            "id": "component-FxUiStandardFormComponent-be331a0d7758a0e1d175223220a89b7f",
             "file": "src/app/ui-lib/atomic/molecules/form-elements/fx-ui-standard-form/fx-ui-standard-form.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -895,7 +706,6 @@
                 "./fx-ui-standard-form.component.html"
             ],
             "viewProviders": [],
-            "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [],
@@ -915,13 +725,6 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "CommonModule",
-                    "type": "module"
-                }
-            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
@@ -930,7 +733,6 @@
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
             "implements": [
                 "OnInit"
             ],
@@ -938,7 +740,7 @@
         },
         {
             "name": "FxUiToggleSwitchComponent",
-            "id": "component-FxUiToggleSwitchComponent-27a6317836dd07b325e0399fdf49edf01e0e0799a3236565dd41a06a7ae630962d640ff616ee7e306968fcb985933797ace4d7b9272465bf75a93efe684dc7c6",
+            "id": "component-FxUiToggleSwitchComponent-2e30bd933b31740a0b8048f489258077",
             "file": "src/app/ui-lib/atomic/molecules/fx-ui-toggle-switch/fx-ui-toggle-switch.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -952,7 +754,6 @@
                 "./fx-ui-toggle-switch.component.html"
             ],
             "viewProviders": [],
-            "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [
@@ -1071,13 +872,6 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "CommonModule",
-                    "type": "module"
-                }
-            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
@@ -1086,12 +880,81 @@
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
             "templateData": "<div [ngClass]=\"{ 'fx-toggle': true, 'fx-toggle-focused': isInputFocused() }\">\n  <span\n    *ngIf=\"toggleTextPosition() === 'left'\"\n    class=\"fx-toggle-text fx-toggle-text--left\"\n  >\n    {{ toggleSupportText() }}\n  </span>\n  <label class=\"fx-toggle-switch\">\n    <input\n      [name]=\"'fx_toggle_switch_' + toggleInputId()\"\n      [id]=\"toggleInputId()\"\n      type=\"checkbox\"\n      [checked]=\"togglePosition()\"\n      (focus)=\"onInputFocus()\"\n      (change)=\"toggleSwitch()\"\n      (blur)=\"onInputBlur()\"\n      (keydown)=\"handleKeyDown($event)\"\n      [attr.aria-checked]=\"togglePosition()\"\n      role=\"switch\"\n      tabindex=\"0\"\n    />\n    <span class=\"fx-toggle-slider\"></span>\n  </label>\n  <span\n    *ngIf=\"toggleTextPosition() === 'right'\"\n    class=\"fx-toggle-text fx-toggle-text--right\"\n  >\n    {{ toggleSupportText() }}\n  </span>\n</div>\n"
         },
         {
+            "name": "HomeComponent",
+            "id": "component-HomeComponent-bb167a89072d1d84a33b9f0f6981c0c2",
+            "file": "src/app/pages/home/home.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-home",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./home.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "items",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MenuItem[] | undefined",
+                    "optional": false,
+                    "description": "",
+                    "line": 34
+                },
+                {
+                    "name": "router",
+                    "defaultValue": "inject(Router)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 35,
+                    "modifierKind": [
+                        112
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 37,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit, inject } from '@angular/core';\nimport { MenuItem } from 'primeng/api';\nimport { MenubarModule } from 'primeng/menubar';\nimport { BadgeModule } from 'primeng/badge';\nimport { AvatarModule } from 'primeng/avatar';\nimport { InputTextModule } from 'primeng/inputtext';\nimport { CommonModule } from '@angular/common';\nimport { RippleModule } from 'primeng/ripple';\nimport { Router } from '@angular/router';\nimport { CardModule } from 'primeng/card';\nimport { ButtonModule } from 'primeng/button';\nimport { PanelModule } from 'primeng/panel';\nimport { AnimateModule } from 'primeng/animate';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n  standalone: true,\n  imports: [\n    AnimateModule,\n    CommonModule,\n    MenubarModule,\n    BadgeModule,\n    AvatarModule,\n    InputTextModule,\n    RippleModule,\n    CardModule,\n    ButtonModule,\n    PanelModule,\n  ],\n  animations: [],\n})\nexport class HomeComponent implements OnInit {\n  items: MenuItem[] | undefined;\n  private router = inject(Router);\n\n  ngOnInit() {\n    this.items = [\n      {\n        label: 'Router',\n        icon: 'pi pi-palette',\n        items: [\n          {\n            label: 'Installation',\n            route: '/installation',\n          },\n          {\n            label: 'Configuration',\n            route: '/configuration',\n          },\n        ],\n      },\n      {\n        label: 'Programmatic',\n        icon: 'pi pi-link',\n        command: () => {\n          this.router.navigate(['/installation']);\n        },\n      },\n      {\n        label: 'External',\n        icon: 'pi pi-home',\n        items: [\n          {\n            label: 'Angular',\n            url: 'https://angular.io/',\n          },\n          {\n            label: 'Vite.js',\n            url: 'https://vitejs.dev/',\n          },\n        ],\n      },\n    ];\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p-menubar [model]=\"items\">\n  <ng-template pTemplate=\"item\" let-item>\n    <ng-container *ngIf=\"item.route; else urlRef\">\n      <a [routerLink]=\"item.route\" class=\"p-menuitem-link\">\n        <span [class]=\"item.icon\"></span>\n        <span class=\"ml-2\">{{ item.label }}</span>\n      </a>\n    </ng-container>\n    <ng-template #urlRef>\n      <a\n        *ngIf=\"item.url; else noLink\"\n        [href]=\"item.url\"\n        class=\"p-menuitem-link\"\n      >\n        <span [class]=\"item.icon\"></span>\n        <span class=\"ml-2\">{{ item.label }}</span>\n      </a>\n    </ng-template>\n    <ng-template #noLink>\n      <div class=\"p-menuitem-link\">\n        <span [class]=\"item.icon\"></span>\n        <span class=\"ml-2\">{{ item.label }}</span>\n        <span class=\"pi pi-fw pi-angle-down ml-2\"></span>\n      </div>\n    </ng-template>\n  </ng-template>\n</p-menubar>\n<p-card\n  header=\"Advanced Card\"\n  subheader=\"Card Subheader\"\n  [style]=\"{ width: '360px' }\"\n>\n  <ng-template pTemplate=\"header\">\n    <img\n      alt=\"Card\"\n      src=\"https://primefaces.org/cdn/primeng/images/card-ng.jpg\"\n    />\n  </ng-template>\n  <p>Lorem ipsum dolor sit amet...</p>\n  <ng-template pTemplate=\"footer\">\n    <div class=\"flex gap-3 mt-1\">\n      <p-button\n        label=\"Cancel\"\n        severity=\"secondary\"\n        class=\"w-full\"\n        styleClass=\"w-full\"\n      />\n      <p-button label=\"Save\" class=\"w-full\" styleClass=\"w-full\" />\n    </div>\n  </ng-template>\n</p-card>\n<section>\n  <div class=\"card flex justify-content-center\">\n    <p-panel header=\"Header\">\n      <p>\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod\n        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim\n        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint\n        occaecat cupidatat non proident, sunt in culpa qui officia deserunt\n        mollit anim id est laborum.\n      </p>\n    </p-panel>\n  </div>\n</section>\n"
+        },
+        {
             "name": "UiLibComponent",
-            "id": "component-UiLibComponent-32895402c290c44ee74e77d0872a86be1e18b965ac697d4bbfb4a4e7c0c464744e7e35998d644c05664af3773b37c3936e88b304f21d9ebdbde13c7730af0987",
+            "id": "component-UiLibComponent-9fc7e30584b6b694d553942b0ed95a10",
             "file": "src/app/ui-lib/ui-lib.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1105,7 +968,6 @@
                 "./ui-lib.component.html"
             ],
             "viewProviders": [],
-            "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [],
@@ -1114,13 +976,6 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "CommonModule",
-                    "type": "module"
-                }
-            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
@@ -1129,7 +984,6 @@
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
             "templateData": "<p>ui-lib works!</p>,\n"
         }
     ],
@@ -1144,7 +998,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "ApplicationConfig",
-                "defaultValue": "{\n  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideStore()]\n}"
+                "defaultValue": "{\n  providers: [\n    provideZoneChangeDetection({ eventCoalescing: true }),\n    provideRouter(routes),\n    provideStore(),\n    importProvidersFrom([BrowserAnimationsModule]),\n  ],\n}"
             }
         ],
         "functions": [],
@@ -1158,7 +1012,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
-                "kind": 192
+                "kind": 168
             },
             {
                 "name": "FxUiButtonIconPosition",
@@ -1169,7 +1023,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
-                "kind": 192
+                "kind": 168
             },
             {
                 "name": "FxUiButtonShape",
@@ -1180,7 +1034,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
-                "kind": 192
+                "kind": 168
             },
             {
                 "name": "FxUiButtonSize",
@@ -1191,7 +1045,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
-                "kind": 192
+                "kind": 168
             },
             {
                 "name": "FxUiButtonState",
@@ -1202,7 +1056,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
-                "kind": 192
+                "kind": 168
             },
             {
                 "name": "FxUiButtonType",
@@ -1213,7 +1067,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
-                "kind": 192
+                "kind": 168
             }
         ],
         "enumerations": [],
@@ -1227,7 +1081,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "ApplicationConfig",
-                    "defaultValue": "{\n  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideStore()]\n}"
+                    "defaultValue": "{\n  providers: [\n    provideZoneChangeDetection({ eventCoalescing: true }),\n    provideRouter(routes),\n    provideStore(),\n    importProvidersFrom([BrowserAnimationsModule]),\n  ],\n}"
                 }
             ]
         },
@@ -1244,7 +1098,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
-                    "kind": 192
+                    "kind": 168
                 },
                 {
                     "name": "FxUiButtonIconPosition",
@@ -1255,7 +1109,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
-                    "kind": 192
+                    "kind": 168
                 },
                 {
                     "name": "FxUiButtonShape",
@@ -1266,7 +1120,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
-                    "kind": 192
+                    "kind": 168
                 },
                 {
                     "name": "FxUiButtonSize",
@@ -1277,7 +1131,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
-                    "kind": 192
+                    "kind": 168
                 },
                 {
                     "name": "FxUiButtonState",
@@ -1288,7 +1142,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
-                    "kind": 192
+                    "kind": 168
                 },
                 {
                     "name": "FxUiButtonType",
@@ -1299,7 +1153,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
-                    "kind": 192
+                    "kind": 168
                 }
             ]
         }
@@ -1326,6 +1180,15 @@
                 "name": "appConfig",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/home/home.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HomeComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
@@ -1361,7 +1224,7 @@
                 "linktype": "component",
                 "name": "FxUiButtonComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/22",
+                "coverageCount": "0/16",
                 "status": "low"
             },
             {
@@ -1406,7 +1269,7 @@
                 "linktype": "component",
                 "name": "FxUiCardComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {

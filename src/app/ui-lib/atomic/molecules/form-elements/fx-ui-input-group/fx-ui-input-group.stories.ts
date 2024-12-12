@@ -1,4 +1,4 @@
-import { Meta, StoryObj, componentWrapperDecorator } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 import { FxUiInputGroupComponent } from './fx-ui-input-group.component';
 
 const meta: Meta<FxUiInputGroupComponent> = {
