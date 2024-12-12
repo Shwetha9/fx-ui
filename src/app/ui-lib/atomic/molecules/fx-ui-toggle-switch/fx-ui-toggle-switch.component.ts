@@ -12,11 +12,11 @@ export class FxUiToggleSwitchComponent {
   toggleInputId = input<string>('toggleInputId');
   toggleSupportText = input<string>('Toggle');
   toggleTextPosition = input<'left' | 'right'>('right');
-  togglePosition = signal<boolean>(false);
+  isToggledOn = signal<boolean>(false);
   isInputFocused = signal<boolean>(false);
 
   toggleSwitch(): void {
-    this.togglePosition.set(!this.togglePosition());
+    this.isToggledOn.set(!this.isToggledOn());
   }
 
   handleKeyDown(event: KeyboardEvent): void {

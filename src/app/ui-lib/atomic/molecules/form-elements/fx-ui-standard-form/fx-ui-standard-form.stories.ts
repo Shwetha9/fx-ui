@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 import { FxUiStandardFormComponent } from './fx-ui-standard-form.component';
 
 const meta: Meta<FxUiStandardFormComponent> = {
-  title: 'FX UI/Atomic Design/Molecules/Form Elements/Input Group',
+  title: 'FX UI/Atomic Design/Organisms/Form Elements/Example Form',
   component: FxUiStandardFormComponent,
   tags: ['autodocs'],
   argTypes: {},

@@ -1,9 +1,9 @@
 @use "../functions/px-to-rem.scss" as *;
 
 $font-size-xs: px-to-rem(12);
+$font-size-sm: px-to-rem(14);
 $font-size-base: px-to-rem(16);
-$font-size-sm: px-to-rem(18);
-$font-size-md: px-to-rem(32);
+$font-size-md: px-to-rem(22);
 $font-size-lg: px-to-rem(48);
 $font-size-xl: px-to-rem(64);
 

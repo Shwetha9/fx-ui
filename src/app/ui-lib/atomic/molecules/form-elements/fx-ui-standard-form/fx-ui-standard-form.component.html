@@ -1,19 +1,29 @@
-<section>
-  <h2>Welcome to onboarding</h2>
-  <p>
-    Just a few steps and you will be well on your way to being our valued
-    customer (or something less cheesy)!
-  </p>
+<section class="fx-ui-form">
+  <h2>Create a task</h2>
+  <!-- Select company-->
   <form>
     <app-fx-ui-input-group
-      [inputLabel]="'This is a test label'"
       [inputType]="'text'"
+      [inputLabel]="'Task title'"
+    ></app-fx-ui-input-group>
+
+    <app-fx-ui-dropdown [options]="options"></app-fx-ui-dropdown>
+    <!-- estimated start-->
+    <!-- due date-->
+
+    <!-- status-->
+    <!-- assign technician dropdown -->
+    <app-fx-ui-toggle-switch
+      [toggleSupportText]="'Assign this task to me'"
+      [toggleTextPosition]="'left'"
     >
-    </app-fx-ui-input-group>
+    </app-fx-ui-toggle-switch>
     <app-fx-ui-input-group
-      [inputLabel]="'This is a test label'"
-      [inputType]="'radio'"
-    >
-    </app-fx-ui-input-group>
+      [inputType]="'text'"
+      [inputLabel]="'Task description'"
+    ></app-fx-ui-input-group>
+
+    <!-- Task notes -->
+    <!-- Submit button-->
   </form>
 </section>

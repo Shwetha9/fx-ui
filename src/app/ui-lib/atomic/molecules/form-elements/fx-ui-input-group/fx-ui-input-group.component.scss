@@ -1,24 +1,28 @@
 @use "../../../../../assets/scss/variables/typography" as *;
 @use "../../../../../assets/scss/variables" as *;
+@use "../../../../../assets/scss/functions/px-to-rem.scss" as *;
+
 .fx-ui-input {
-  &-group {
-    display: flex;
-    align-items: center;
-  }
+  margin: px-to-rem(20) 0;
   &-label {
-    margin-right: 10px;
-    font-size: $font-size-sm;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: $font-size-base;
   }
   &-radio,
   &-checkbox {
     height: 20px;
     width: 20px;
   }
+  &-radio {
+    border-radius: 50%;
+    display: block;
+  }
 
   &-text {
     width: 100%;
     padding: 10px;
-    border: 1px solid $grey-300;
+    border: 1px solid $grey-500;
     border-radius: 5px;
     font-size: $font-size-sm;
     &:focus {
