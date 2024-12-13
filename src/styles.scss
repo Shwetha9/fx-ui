@@ -29,8 +29,9 @@
 
 body,
 html {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif !important;
   font-weight: 300;
+  font-size: 14px;
   line-height: 1.25;
   margin: 0;
   padding: 0;

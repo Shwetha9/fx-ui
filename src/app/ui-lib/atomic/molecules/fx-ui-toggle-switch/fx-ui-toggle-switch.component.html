@@ -1,6 +1,7 @@
 <div [ngClass]="{ 'fx-toggle': true, 'fx-toggle-focused': isInputFocused() }">
   <span
     *ngIf="toggleTextPosition() === 'left'"
+    id="toggle-text-{{ toggleInputId() }}"
     class="fx-toggle-text fx-toggle-text--left"
   >
     {{ toggleSupportText() }}
@@ -16,13 +17,16 @@
       (blur)="onInputBlur()"
       (keydown)="handleKeyDown($event)"
       [attr.aria-checked]="isToggledOn()"
-      role="switch"
+      [attr.role]="'switch'"
+      [attr.aria-label]="'Assign this task to yourself'"
+      [attr.aria-labelledby]="toggleInputId()"
       tabindex="0"
     />
     <span class="fx-toggle-slider"></span>
   </label>
   <span
     *ngIf="toggleTextPosition() === 'right'"
+    id="toggle-text-{{ toggleInputId() }}"
     class="fx-toggle-text fx-toggle-text--right"
   >
     {{ toggleSupportText() }}

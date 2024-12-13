@@ -1,0 +1,36 @@
+@use "../../../assets/scss/generators/container" as *;
+.fx-ui-form {
+  min-height: 100vh;
+  padding: 1rem;
+
+  h2 {
+    margin: 1rem 0 3rem 0;
+  }
+
+  form {
+    background-color: #f7f7f7;
+    padding: 2rem 8rem;
+    min-height: 100vh;
+    border-radius: 4px;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    app-fx-ui-button {
+      display: inline-block;
+      text-align: right;
+    }
+  }
+
+  &-item {
+    width: 100%;
+    display: block;
+    margin: 1rem 0;
+    &--buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+  }
+}

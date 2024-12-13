@@ -1,14 +1,19 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
+import { NewTaskComponent } from './pages/forms/new-task/new-task.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   {
-    path: '**',
-    redirectTo: 'home',
+    path: 'create-task',
+    component: NewTaskComponent,
   },
   {
     path: 'home',
-    component: HomeComponent,
+    component: NewTaskComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
   },
 ];

@@ -24,7 +24,7 @@ export class FxUiButtonComponent implements OnInit {
   iconPosition = input<FxUiButtonIconPosition>();
   state = input<FxUiButtonState>();
   label = input.required<string>();
-  buttonClickEvent = output<void>();
+  buttonClickEvent = output<Event>();
   classModifiers: { [key: string]: boolean } = {};
   icon = input<string>();
 
@@ -47,8 +47,8 @@ export class FxUiButtonComponent implements OnInit {
     };
   }
 
-  handleButtonClick(): void {
-    this.buttonClickEvent.emit();
+  handleButtonClick(event: Event): void {
+    this.buttonClickEvent.emit(event);
   }
 
   // Computed properties

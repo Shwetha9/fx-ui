@@ -87,7 +87,7 @@
         },
         {
             "name": "FxUiButtonComponent",
-            "id": "component-FxUiButtonComponent-bbfdcef0fa2ef5142f143f141b57e374",
+            "id": "component-FxUiButtonComponent-cf1b7a0680a83ffd6b93627a426657ff",
             "file": "src/app/ui-lib/atomic/atoms/fx-ui-button/fx-ui-button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -108,7 +108,7 @@
             "propertiesClass": [
                 {
                     "name": "buttonClickEvent",
-                    "defaultValue": "output<void>()",
+                    "defaultValue": "output<Event>()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -233,13 +233,31 @@
                 },
                 {
                     "name": "handleButtonClick",
-                    "args": [],
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
                     "line": 50,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 },
                 {
                     "name": "ngOnChanges",
@@ -269,7 +287,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, OnInit, input, computed, output } from '@angular/core';\nimport {\n  FxUiButtonType,\n  FxUiButtonSize,\n  FxUiButtonColor,\n  FxUiButtonShape,\n  FxUiButtonIconPosition,\n  FxUiButtonState,\n} from './fx-ui-button.component.type';\n\n@Component({\n  selector: 'app-fx-ui-button',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './fx-ui-button.component.html',\n  styleUrls: ['./fx-ui-button.component.scss'],\n})\nexport class FxUiButtonComponent implements OnInit {\n  type = input<FxUiButtonType>('fill');\n  size = input<FxUiButtonSize>('medium');\n  color = input<FxUiButtonColor>('secondary');\n  shape = input<FxUiButtonShape>();\n  iconPosition = input<FxUiButtonIconPosition>();\n  state = input<FxUiButtonState>();\n  label = input.required<string>();\n  buttonClickEvent = output<void>();\n  classModifiers: { [key: string]: boolean } = {};\n  icon = input<string>();\n\n  ngOnInit(): void {\n    this.classModifiers = this.generateButtonClass();\n  }\n\n  ngOnChanges(): void {\n    this.classModifiers = this.generateButtonClass();\n  }\n\n  generateButtonClass(): { [key: string]: boolean } {\n    return {\n      [`fx-button--${this.size()}`]: !!this.size(),\n      [`fx-button--${this.color()}`]: !!this.color(),\n      [`fx-button--${this.shape()}`]: !!this.shape(),\n      [`fx-button--${this.iconPosition()}`]: !!this.iconPosition(),\n      [`fx-button--${this.state()}`]: !!this.state(),\n      [`fx-button--${this.type()}`]: !!this.type(),\n    };\n  }\n\n  handleButtonClick(): void {\n    this.buttonClickEvent.emit();\n  }\n\n  // Computed properties\n  readonly isDisabled = computed(\n    () => this.state() === 'disabled' || this.state() === 'loading',\n  );\n}\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, OnInit, input, computed, output } from '@angular/core';\nimport {\n  FxUiButtonType,\n  FxUiButtonSize,\n  FxUiButtonColor,\n  FxUiButtonShape,\n  FxUiButtonIconPosition,\n  FxUiButtonState,\n} from './fx-ui-button.component.type';\n\n@Component({\n  selector: 'app-fx-ui-button',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './fx-ui-button.component.html',\n  styleUrls: ['./fx-ui-button.component.scss'],\n})\nexport class FxUiButtonComponent implements OnInit {\n  type = input<FxUiButtonType>('fill');\n  size = input<FxUiButtonSize>('medium');\n  color = input<FxUiButtonColor>('secondary');\n  shape = input<FxUiButtonShape>();\n  iconPosition = input<FxUiButtonIconPosition>();\n  state = input<FxUiButtonState>();\n  label = input.required<string>();\n  buttonClickEvent = output<Event>();\n  classModifiers: { [key: string]: boolean } = {};\n  icon = input<string>();\n\n  ngOnInit(): void {\n    this.classModifiers = this.generateButtonClass();\n  }\n\n  ngOnChanges(): void {\n    this.classModifiers = this.generateButtonClass();\n  }\n\n  generateButtonClass(): { [key: string]: boolean } {\n    return {\n      [`fx-button--${this.size()}`]: !!this.size(),\n      [`fx-button--${this.color()}`]: !!this.color(),\n      [`fx-button--${this.shape()}`]: !!this.shape(),\n      [`fx-button--${this.iconPosition()}`]: !!this.iconPosition(),\n      [`fx-button--${this.state()}`]: !!this.state(),\n      [`fx-button--${this.type()}`]: !!this.type(),\n    };\n  }\n\n  handleButtonClick(event: Event): void {\n    this.buttonClickEvent.emit(event);\n  }\n\n  // Computed properties\n  readonly isDisabled = computed(\n    () => this.state() === 'disabled' || this.state() === 'loading',\n  );\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -281,7 +299,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<button\n  [attr.aria-label]=\"label()\"\n  [attr.aria-disabled]=\"isDisabled()\"\n  [attr.aria-pressed]=\"state() === 'active'\"\n  [attr.aria-describedby]=\"label() + '-description'\"\n  class=\"fx-button\"\n  (click)=\"handleButtonClick()\"\n  [ngClass]=\"classModifiers\"\n  [disabled]=\"isDisabled()\"\n>\n  <ng-container *ngIf=\"iconPosition() === 'left'\">\n    <span class=\"material-symbols-outlined fx-button-icon fx-button-icon--left\">\n      {{ icon() }}\n    </span>\n  </ng-container>\n  <span> {{ label() }}</span>\n  <ng-container *ngIf=\"iconPosition() === 'right'\">\n    <span\n      class=\"material-symbols-outlined fx-button-icon fx-button-icon--right\"\n    >\n      {{ icon() }}\n    </span>\n  </ng-container>\n  @if (state() === \"loading\") {\n    <span\n      class=\"material-symbols-outlined fx-button-icon fx-button-icon--right\"\n    >\n      progress_activity\n    </span>\n  }\n</button>\n"
+            "templateData": "<button\n  [attr.aria-label]=\"label()\"\n  [attr.aria-disabled]=\"isDisabled()\"\n  [attr.aria-pressed]=\"state() === 'active'\"\n  [attr.aria-describedby]=\"label() + '-description'\"\n  class=\"fx-button\"\n  (click)=\"handleButtonClick($event)\"\n  [ngClass]=\"classModifiers\"\n  [disabled]=\"isDisabled()\"\n>\n  <ng-container *ngIf=\"iconPosition() === 'left'\">\n    <span class=\"material-symbols-outlined fx-button-icon fx-button-icon--left\">\n      {{ icon() }}\n    </span>\n  </ng-container>\n  <span> {{ label() }}</span>\n  <ng-container *ngIf=\"iconPosition() === 'right'\">\n    <span\n      class=\"material-symbols-outlined fx-button-icon fx-button-icon--right\"\n    >\n      {{ icon() }}\n    </span>\n  </ng-container>\n  @if (state() === \"loading\") {\n    <span\n      class=\"material-symbols-outlined fx-button-icon fx-button-icon--right\"\n    >\n      progress_activity\n    </span>\n  }\n</button>\n"
         },
         {
             "name": "FxUiCardComponent",
@@ -383,6 +401,347 @@
             "templateData": "<div class=\"fx-ui-card\">\n  <div class=\"fx-ui-card-image\">\n    <img [src]=\"cardImage()\" [alt]=\"cardImgAltText()\" />\n  </div>\n  <div class=\"fx-ui-card-body\">\n    <h2>{{ cardTitle() }}</h2>\n    <div [innerHtml]=\"cardDescription()\"></div>\n  </div>\n  <div class=\"fx-ui-card-footer\">\n    @if (cardFooter()?.footerRichText) {\n      <div\n        class=\"fx-ui-card-footer-text\"\n        [innerHtml]=\"cardFooter()?.footerRichText\"\n      ></div>\n    }\n    @if (cardFooter()?.footerButton) {\n      <app-fx-ui-button\n        [color]=\"'primary'\"\n        [label]=\"'Find out more'\"\n        [size]=\"'small'\"\n      ></app-fx-ui-button>\n    }\n  </div>\n</div>\n"
         },
         {
+            "name": "FxUiDropdownComponent",
+            "id": "component-FxUiDropdownComponent-d152034174ae89477675b5a9fd0ecd63",
+            "file": "src/app/ui-lib/atomic/molecules/form-elements/fx-ui-dropdown/fx-ui-dropdown.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [
+                {
+                    "name": "{\n    provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => FxUiDropdownComponent), multi: true,\n}",
+                    "type": "component"
+                }
+            ],
+            "selector": "app-fx-ui-dropdown",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./fx-ui-dropdown.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 40
+                },
+                {
+                    "name": "elementRef",
+                    "defaultValue": "inject(ElementRef)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 36
+                },
+                {
+                    "name": "isOpen",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 35
+                },
+                {
+                    "name": "onChange",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "optional": false,
+                    "description": "",
+                    "line": 37
+                },
+                {
+                    "name": "onTouched",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "optional": false,
+                    "description": "",
+                    "line": 38
+                },
+                {
+                    "name": "optionLabel",
+                    "defaultValue": "input('an option')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 33
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "input<string[]>(['Option 1', 'Option 2', 'Option 3'])",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 32
+                },
+                {
+                    "name": "selectedOption",
+                    "defaultValue": "signal('')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 34
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 39
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "handleOutsideClick",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "decorators": [
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'document:click', ['$event']"
+                        }
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "registerOnChange",
+                    "args": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [
+                                {
+                                    "name": "value",
+                                    "type": "any",
+                                    "deprecated": false,
+                                    "deprecationMessage": ""
+                                }
+                            ]
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 64,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [
+                                {
+                                    "name": "value",
+                                    "type": "any",
+                                    "deprecated": false,
+                                    "deprecationMessage": ""
+                                }
+                            ],
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "registerOnTouched",
+                    "args": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": []
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 69,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [],
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "selectOption",
+                    "args": [
+                        {
+                            "name": "option",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 48,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "option",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "toggleDropdown",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 43,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "writeValue",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 59,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [
+                {
+                    "name": "document:click",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "argsDecorator": [
+                        "$event"
+                    ],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 53
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport {\n  Component,\n  ElementRef,\n  forwardRef,\n  HostListener,\n  inject,\n  input,\n  model,\n  signal,\n} from '@angular/core';\nimport {\n  NG_VALUE_ACCESSOR,\n  FormsModule,\n  ReactiveFormsModule,\n} from '@angular/forms';\n@Component({\n  selector: 'app-fx-ui-dropdown',\n  standalone: true,\n  imports: [CommonModule, FormsModule, ReactiveFormsModule],\n  templateUrl: './fx-ui-dropdown.component.html',\n  styleUrl: './fx-ui-dropdown.component.scss',\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => FxUiDropdownComponent),\n      multi: true,\n    },\n  ],\n})\nexport class FxUiDropdownComponent {\n  options = input<string[]>(['Option 1', 'Option 2', 'Option 3']);\n  optionLabel = input('an option');\n  selectedOption = signal('');\n  isOpen = false;\n  elementRef: ElementRef = inject(ElementRef);\n  onChange: (value: any) => void = () => {};\n  onTouched: () => void = () => {};\n  value = '';\n  disabled = false;\n  // This closes the dropdown immediately when an option is selected, needs to be fixed\n\n  toggleDropdown(event: Event) {\n    event.preventDefault();\n    this.isOpen = !this.isOpen;\n  }\n\n  selectOption(option: string) {\n    this.selectedOption.set(option);\n    this.isOpen = false;\n  }\n  @HostListener('document:click', ['$event'])\n  handleOutsideClick(event: Event) {\n    if (!this.elementRef.nativeElement.contains(event.target)) {\n      this.isOpen = false;\n    }\n  }\n  // Write a new value to the element\n  writeValue(value: any): void {\n    this.value = value;\n  }\n\n  // Register the function to call when the value changes\n  registerOnChange(fn: (value: any) => void): void {\n    this.onChange = fn;\n  }\n\n  // Register the function to call when the control is touched\n  registerOnTouched(fn: () => void): void {\n    this.onTouched = fn;\n  }\n}\n",
+            "styleUrl": "./fx-ui-dropdown.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "templateData": "<div class=\"dropdown\">\n  <label>Select {{ optionLabel() }}</label>\n  <button\n    class=\"dropdown-toggle\"\n    (click)=\"toggleDropdown($event)\"\n    [attr.aria-expanded]=\"isOpen\"\n    [attr.aria-label]=\"'Drop down toggle to select ' + optionLabel()\"\n  >\n    <span class=\"dropdown-selected\">{{ selectedOption() || \"\" }}</span>\n    <span class=\"material-symbols-outlined dropdown-arrow\">\n      {{ isOpen ? \"arrow_drop_up\" : \"arrow_drop_down\" }}\n    </span>\n  </button>\n  <ul class=\"dropdown-menu\" *ngIf=\"isOpen\">\n    <li\n      *ngFor=\"let option of options()\"\n      class=\"dropdown-item\"\n      (click)=\"selectOption(option)\"\n    >\n      {{ option }}\n    </li>\n  </ul>\n</div>\n"
+        },
+        {
             "name": "FxUiInputCheckboxComponent",
             "id": "component-FxUiInputCheckboxComponent-6125acd468b8938b0b6e85318f56487f",
             "file": "src/app/ui-lib/atomic/atoms/form-elements/fx-ui-input-checkbox/fx-ui-input-checkbox.component.ts",
@@ -432,13 +791,18 @@
         },
         {
             "name": "FxUiInputGroupComponent",
-            "id": "component-FxUiInputGroupComponent-425eb3b345898746c6c125bcf814750b",
+            "id": "component-FxUiInputGroupComponent-611306aecddd9ac17f2c026b2d334271",
             "file": "src/app/ui-lib/atomic/molecules/form-elements/fx-ui-input-group/fx-ui-input-group.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
-            "providers": [],
+            "providers": [
+                {
+                    "name": "{\n    provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => FxUiInputGroupComponent), multi: true,\n}",
+                    "type": "component"
+                }
+            ],
             "selector": "app-fx-ui-input-group",
             "styleUrls": [],
             "styles": [],
@@ -450,14 +814,37 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
-                    "name": "getComputedLabelProps",
-                    "defaultValue": "computed(() => {\n    let labelFor = `text_${v4()}`;\n\n    if (this.inputType() === 'radio') {\n      labelFor = `radio_${v4()}`;\n    }\n\n    if (this.inputType() === 'checkbox') {\n      labelFor = `checkbox_${v4()}`;\n    }\n\n    return labelFor;\n  })",
+                    "name": "baseId",
+                    "defaultValue": "v4()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 34,
+                    "modifierKind": [
+                        112
+                    ]
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 38
+                },
+                {
+                    "name": "getComputedLabelProps",
+                    "defaultValue": "computed(() => {\n    let labelFor = `${this.baseId}_text`;\n\n    if (this.inputType() === 'radio') {\n      labelFor = `${this.baseId}_radio`;\n    }\n\n    if (this.inputType() === 'checkbox') {\n      labelFor = `${this.baseId}_checkbox`;\n    }\n\n    return labelFor;\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 40
                 },
                 {
                     "name": "inputGroupId",
@@ -467,7 +854,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 16
+                    "line": 33
                 },
                 {
                     "name": "inputId",
@@ -477,7 +864,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 15
+                    "line": 32
                 },
                 {
                     "name": "inputLabel",
@@ -487,7 +874,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 14
+                    "line": 31
                 },
                 {
                     "name": "inputType",
@@ -497,19 +884,197 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 13
+                    "line": 30
+                },
+                {
+                    "name": "onChange",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "optional": false,
+                    "description": "",
+                    "line": 35
+                },
+                {
+                    "name": "onTouched",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "optional": false,
+                    "description": "",
+                    "line": 36
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 37
                 }
             ],
             "methodsClass": [
                 {
-                    "name": "ngOnInit",
-                    "args": [],
+                    "name": "onInput",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 32,
+                    "line": 74,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "registerOnChange",
+                    "args": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [
+                                {
+                                    "name": "value",
+                                    "type": "any",
+                                    "deprecated": false,
+                                    "deprecationMessage": ""
+                                }
+                            ]
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 60,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [
+                                {
+                                    "name": "value",
+                                    "type": "any",
+                                    "deprecated": false,
+                                    "deprecationMessage": ""
+                                }
+                            ],
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "registerOnTouched",
+                    "args": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": []
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 65,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [],
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "setDisabledState",
+                    "args": [
+                        {
+                            "name": "isDisabled",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 70,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "isDisabled",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "writeValue",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 55,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "deprecated": false,
@@ -519,15 +1084,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, computed, input, type OnInit } from '@angular/core';\nimport { v4 } from 'uuid';\n\n@Component({\n  selector: 'app-fx-ui-input-group',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './fx-ui-input-group.component.html',\n  styleUrl: './fx-ui-input-group.component.scss',\n})\nexport class FxUiInputGroupComponent implements OnInit {\n  inputType = input<'text' | 'radio' | 'checkbox'>('text');\n  inputLabel = input<string>('Input Label');\n  inputId = v4();\n  inputGroupId = v4();\n\n  getComputedLabelProps = computed(() => {\n    let labelFor = `text_${v4()}`;\n\n    if (this.inputType() === 'radio') {\n      labelFor = `radio_${v4()}`;\n    }\n\n    if (this.inputType() === 'checkbox') {\n      labelFor = `checkbox_${v4()}`;\n    }\n\n    return labelFor;\n  });\n\n  ngOnInit(): void {}\n}\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport {\n  Component,\n  computed,\n  forwardRef,\n  input,\n  type OnInit,\n} from '@angular/core';\nimport { v4 } from 'uuid';\nimport {\n  NG_VALUE_ACCESSOR,\n  FormsModule,\n  ReactiveFormsModule,\n} from '@angular/forms';\n@Component({\n  selector: 'app-fx-ui-input-group',\n  standalone: true,\n  imports: [CommonModule, FormsModule, ReactiveFormsModule],\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => FxUiInputGroupComponent),\n      multi: true,\n    },\n  ],\n  templateUrl: './fx-ui-input-group.component.html',\n  styleUrl: './fx-ui-input-group.component.scss',\n})\nexport class FxUiInputGroupComponent {\n  inputType = input<'text' | 'radio' | 'checkbox'>('text');\n  inputLabel = input<string>('Input Label');\n  inputId = v4();\n  inputGroupId = v4();\n  private baseId = v4();\n  onChange: (value: any) => void = () => {};\n  onTouched: () => void = () => {};\n  value = '';\n  disabled = false;\n\n  getComputedLabelProps = computed(() => {\n    let labelFor = `${this.baseId}_text`;\n\n    if (this.inputType() === 'radio') {\n      labelFor = `${this.baseId}_radio`;\n    }\n\n    if (this.inputType() === 'checkbox') {\n      labelFor = `${this.baseId}_checkbox`;\n    }\n\n    return labelFor;\n  });\n\n  // Write a new value to the element\n  writeValue(value: any): void {\n    this.value = value;\n  }\n\n  // Register the function to call when the value changes\n  registerOnChange(fn: (value: any) => void): void {\n    this.onChange = fn;\n  }\n\n  // Register the function to call when the control is touched\n  registerOnTouched(fn: () => void): void {\n    this.onTouched = fn;\n  }\n\n  // Allow Angular to disable the component\n  setDisabledState(isDisabled: boolean): void {\n    this.disabled = isDisabled;\n  }\n\n  onInput(event: Event): void {\n    const target = event.target as HTMLInputElement;\n    this.value = target.value;\n    this.onChange(this.value); // Notify Angular forms of the value change\n    this.onTouched(); // Mark as touched\n  }\n}\n",
             "styleUrl": "./fx-ui-input-group.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<div class=\"fx-ui-input\">\n  <form class=\"fx-ui-input-group\">\n    <label [for]=\"getComputedLabelProps()\" class=\"fx-ui-input-label\">\n      {{ inputLabel() }}\n    </label>\n    @if (inputType() === \"text\") {\n      <input\n        type=\"text\"\n        [id]=\"getComputedLabelProps()\"\n        [name]=\"getComputedLabelProps()\"\n        class=\"fx-ui-input-text\"\n      />\n    }\n    @if (inputType() === \"radio\") {\n      <input\n        type=\"radio\"\n        [id]=\"getComputedLabelProps()\"\n        [name]=\"getComputedLabelProps()\"\n        class=\"fx-ui-input-radio\"\n      />\n    }\n    @if (inputType() === \"checkbox\") {\n      <input\n        type=\"checkbox\"\n        [id]=\"getComputedLabelProps()\"\n        [name]=\"getComputedLabelProps()\"\n        class=\"fx-ui-input-checkbox\"\n      />\n    }\n  </form>\n</div>\n"
+            "templateData": "<div class=\"fx-ui-input\">\n  <form class=\"fx-ui-input-group\">\n    <label [for]=\"getComputedLabelProps()\" class=\"fx-ui-input-label\">\n      {{ inputLabel() }}\n    </label>\n\n    @if (inputType() === \"text\") {\n      <input\n        type=\"text\"\n        [name]=\"getComputedLabelProps()\"\n        [id]=\"getComputedLabelProps()\"\n        [value]=\"value\"\n        [disabled]=\"disabled\"\n        (input)=\"onInput($event)\"\n        (blur)=\"onTouched()\"\n        class=\"fx-ui-input-text\"\n      />\n    }\n    @if (inputType() === \"radio\") {\n      <input\n        type=\"radio\"\n        [name]=\"getComputedLabelProps()\"\n        [id]=\"getComputedLabelProps()\"\n        [value]=\"value\"\n        [disabled]=\"disabled\"\n        (input)=\"onInput($event)\"\n        (blur)=\"onTouched()\"\n        class=\"fx-ui-input-radio\"\n      />\n    }\n    @if (inputType() === \"checkbox\") {\n      <input\n        type=\"checkbox\"\n        [name]=\"getComputedLabelProps()\"\n        [id]=\"getComputedLabelProps()\"\n        [value]=\"value\"\n        [disabled]=\"disabled\"\n        (input)=\"onInput($event)\"\n        (blur)=\"onTouched()\"\n        class=\"fx-ui-input-checkbox\"\n      />\n    }\n  </form>\n</div>\n"
         },
         {
             "name": "FxUiInputRadioComponent",
@@ -692,7 +1254,7 @@
         },
         {
             "name": "FxUiStandardFormComponent",
-            "id": "component-FxUiStandardFormComponent-8f9d23fb2c8dcbf594840fef11f3313b",
+            "id": "component-FxUiStandardFormComponent-3533cd7d98c4d8dd5c97fbb7b56a1def",
             "file": "src/app/ui-lib/atomic/molecules/form-elements/fx-ui-standard-form/fx-ui-standard-form.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -708,7 +1270,18 @@
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "options",
+                    "defaultValue": "['Option 1', 'Option 2', 'Option 3']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                }
+            ],
             "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
@@ -717,22 +1290,27 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, type OnInit } from '@angular/core';\nimport { FxUiInputGroupComponent } from '../fx-ui-input-group/fx-ui-input-group.component';\n\n@Component({\n  selector: 'app-fx-ui-standard-form',\n  standalone: true,\n  imports: [CommonModule, FxUiInputGroupComponent],\n  templateUrl: './fx-ui-standard-form.component.html',\n  styleUrl: './fx-ui-standard-form.component.scss',\n})\nexport class FxUiStandardFormComponent {}\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, type OnInit } from '@angular/core';\nimport { FxUiInputGroupComponent } from '../fx-ui-input-group/fx-ui-input-group.component';\nimport { FxUiToggleSwitchComponent } from '../../fx-ui-toggle-switch/fx-ui-toggle-switch.component';\nimport { FxUiDropdownComponent } from '../fx-ui-dropdown/fx-ui-dropdown.component';\n\n@Component({\n  selector: 'app-fx-ui-standard-form',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FxUiInputGroupComponent,\n    FxUiToggleSwitchComponent,\n    FxUiDropdownComponent,\n  ],\n  templateUrl: './fx-ui-standard-form.component.html',\n  styleUrl: './fx-ui-standard-form.component.scss',\n})\nexport class FxUiStandardFormComponent {\n  options: string[] = ['Option 1', 'Option 2', 'Option 3'];\n}\n",
             "styleUrl": "./fx-ui-standard-form.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "templateData": "<section class=\"fx-ui-form\">\n  <h2>Welcome to onboarding</h2>\n  <p>\n    Just a few steps and you will be well on your way to being our valued\n    customer (or something less cheesy)!\n  </p>\n  <form>\n    <app-fx-ui-input-group\n      [inputLabel]=\"'Please enter your first name'\"\n      [inputType]=\"'text'\"\n    >\n    </app-fx-ui-input-group>\n    <app-fx-ui-input-group\n      [inputLabel]=\"'Please enter your last name'\"\n      [inputType]=\"'text'\"\n    >\n    </app-fx-ui-input-group>\n    <app-fx-ui-input-group\n      [inputLabel]=\"'Please enter your email address'\"\n      [inputType]=\"'text'\"\n    >\n    </app-fx-ui-input-group>\n    <app-fx-ui-input-group\n      [inputLabel]=\"'I would like to use promo code'\"\n      [inputType]=\"'radio'\"\n    >\n    </app-fx-ui-input-group>\n    <app-fx-ui-input-group\n      [inputLabel]=\"'Please enter your promo code'\"\n      [inputType]=\"'text'\"\n    >\n    </app-fx-ui-input-group>\n  </form>\n  <hr />\n  <form>\n    <app-fx-ui-input-group\n      [inputLabel]=\"\n        'So we can give you the best deals with books, please select your favourite genre'\n      \"\n      [inputType]=\"'text'\"\n    >\n    </app-fx-ui-input-group>\n  </form>\n</section>\n"
+            "templateData": "<section class=\"fx-ui-form\">\n  <h2>Create a task</h2>\n  <!-- Select company-->\n  <form>\n    <app-fx-ui-input-group\n      [inputType]=\"'text'\"\n      [inputLabel]=\"'Task title'\"\n    ></app-fx-ui-input-group>\n\n    <app-fx-ui-dropdown [options]=\"options\"></app-fx-ui-dropdown>\n    <!-- estimated start-->\n    <!-- due date-->\n\n    <!-- status-->\n    <!-- assign technician dropdown -->\n    <app-fx-ui-toggle-switch\n      [toggleSupportText]=\"'Assign this task to me'\"\n      [toggleTextPosition]=\"'left'\"\n    >\n    </app-fx-ui-toggle-switch>\n    <app-fx-ui-input-group\n      [inputType]=\"'text'\"\n      [inputLabel]=\"'Task description'\"\n    ></app-fx-ui-input-group>\n\n    <!-- Task notes -->\n    <!-- Submit button-->\n  </form>\n</section>\n"
         },
         {
             "name": "FxUiToggleSwitchComponent",
-            "id": "component-FxUiToggleSwitchComponent-2e30bd933b31740a0b8048f489258077",
+            "id": "component-FxUiToggleSwitchComponent-b961c7c48c7b287e24a94b4bb3ec383d",
             "file": "src/app/ui-lib/atomic/molecules/fx-ui-toggle-switch/fx-ui-toggle-switch.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
-            "providers": [],
+            "providers": [
+                {
+                    "name": "{\n    provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => FxUiToggleSwitchComponent), multi: true,\n}",
+                    "type": "component"
+                }
+            ],
             "selector": "app-fx-ui-toggle-switch",
             "styleUrls": [],
             "styles": [],
@@ -744,6 +1322,16 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 29
+                },
+                {
                     "name": "isInputFocused",
                     "defaultValue": "signal<boolean>(false)",
                     "deprecated": false,
@@ -751,7 +1339,37 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 16
+                    "line": 24
+                },
+                {
+                    "name": "isToggledOn",
+                    "defaultValue": "signal<boolean>(false)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
+                },
+                {
+                    "name": "onChange",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "onTouched",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "optional": false,
+                    "description": "",
+                    "line": 27
                 },
                 {
                     "name": "toggleInputId",
@@ -761,17 +1379,17 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 12
+                    "line": 20
                 },
                 {
-                    "name": "togglePosition",
-                    "defaultValue": "signal<boolean>(false)",
+                    "name": "toggleName",
+                    "defaultValue": "input.required()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 15
+                    "line": 25
                 },
                 {
                     "name": "toggleSupportText",
@@ -781,7 +1399,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 13
+                    "line": 21
                 },
                 {
                     "name": "toggleTextPosition",
@@ -791,7 +1409,17 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 14
+                    "line": 22
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 28
                 }
             ],
             "methodsClass": [
@@ -808,7 +1436,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 22,
+                    "line": 38,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -824,12 +1452,22 @@
                     ]
                 },
                 {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
                     "name": "onInputBlur",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 32,
+                    "line": 48,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -839,9 +1477,83 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 28,
+                    "line": 44,
                     "deprecated": false,
                     "deprecationMessage": ""
+                },
+                {
+                    "name": "registerOnChange",
+                    "args": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [
+                                {
+                                    "name": "value",
+                                    "type": "any",
+                                    "deprecated": false,
+                                    "deprecationMessage": ""
+                                }
+                            ]
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 58,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [
+                                {
+                                    "name": "value",
+                                    "type": "any",
+                                    "deprecated": false,
+                                    "deprecationMessage": ""
+                                }
+                            ],
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "registerOnTouched",
+                    "args": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": []
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 63,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [],
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 },
                 {
                     "name": "toggleSwitch",
@@ -849,9 +1561,37 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 18,
+                    "line": 34,
                     "deprecated": false,
                     "deprecationMessage": ""
+                },
+                {
+                    "name": "writeValue",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "deprecated": false,
@@ -861,16 +1601,19 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, input, signal } from '@angular/core';\n\n@Component({\n  selector: 'app-fx-ui-toggle-switch',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './fx-ui-toggle-switch.component.html',\n  styleUrl: './fx-ui-toggle-switch.component.scss',\n})\nexport class FxUiToggleSwitchComponent {\n  toggleInputId = input<string>('toggleInputId');\n  toggleSupportText = input<string>('Toggle');\n  toggleTextPosition = input<'left' | 'right'>('right');\n  togglePosition = signal<boolean>(false);\n  isInputFocused = signal<boolean>(false);\n\n  toggleSwitch(): void {\n    this.togglePosition.set(!this.togglePosition());\n  }\n\n  handleKeyDown(event: KeyboardEvent): void {\n    if (event.key === 'Enter' || event.key === ' ') {\n      event.preventDefault();\n      this.toggleSwitch();\n    }\n  }\n  onInputFocus(): void {\n    this.isInputFocused.set(true);\n  }\n\n  onInputBlur(): void {\n    this.isInputFocused.set(false);\n  }\n}\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, forwardRef, input, OnInit, signal } from '@angular/core';\nimport { NG_VALUE_ACCESSOR } from '@angular/forms';\n\n@Component({\n  selector: 'app-fx-ui-toggle-switch',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './fx-ui-toggle-switch.component.html',\n  styleUrl: './fx-ui-toggle-switch.component.scss',\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => FxUiToggleSwitchComponent),\n      multi: true,\n    },\n  ],\n})\nexport class FxUiToggleSwitchComponent implements OnInit {\n  toggleInputId = input<string>('toggleInputId');\n  toggleSupportText = input<string>('Toggle');\n  toggleTextPosition = input<'left' | 'right'>('right');\n  isToggledOn = signal<boolean>(false);\n  isInputFocused = signal<boolean>(false);\n  toggleName = input.required();\n  onChange: (value: any) => void = () => {};\n  onTouched: () => void = () => {};\n  value = '';\n  disabled = false;\n\n  ngOnInit(): void {\n    console.log(this.toggleName());\n  }\n  toggleSwitch(): void {\n    this.isToggledOn.set(!this.isToggledOn());\n  }\n\n  handleKeyDown(event: KeyboardEvent): void {\n    if (event.key === 'Enter' || event.key === ' ') {\n      event.preventDefault();\n      this.toggleSwitch();\n    }\n  }\n  onInputFocus(): void {\n    this.isInputFocused.set(true);\n  }\n\n  onInputBlur(): void {\n    this.isInputFocused.set(false);\n  }\n\n  // Write a new value to the element\n  writeValue(value: any): void {\n    this.value = value;\n  }\n\n  // Register the function to call when the value changes\n  registerOnChange(fn: (value: any) => void): void {\n    this.onChange = fn;\n  }\n\n  // Register the function to call when the control is touched\n  registerOnTouched(fn: () => void): void {\n    this.onTouched = fn;\n  }\n}\n",
             "styleUrl": "./fx-ui-toggle-switch.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "templateData": "<div [ngClass]=\"{ 'fx-toggle': true, 'fx-toggle-focused': isInputFocused() }\">\n  <span\n    *ngIf=\"toggleTextPosition() === 'left'\"\n    class=\"fx-toggle-text fx-toggle-text--left\"\n  >\n    {{ toggleSupportText() }}\n  </span>\n  <label class=\"fx-toggle-switch\">\n    <input\n      [name]=\"'fx_toggle_switch_' + toggleInputId()\"\n      [id]=\"toggleInputId()\"\n      type=\"checkbox\"\n      [checked]=\"togglePosition()\"\n      (focus)=\"onInputFocus()\"\n      (change)=\"toggleSwitch()\"\n      (blur)=\"onInputBlur()\"\n      (keydown)=\"handleKeyDown($event)\"\n      [attr.aria-checked]=\"togglePosition()\"\n      role=\"switch\"\n      tabindex=\"0\"\n    />\n    <span class=\"fx-toggle-slider\"></span>\n  </label>\n  <span\n    *ngIf=\"toggleTextPosition() === 'right'\"\n    class=\"fx-toggle-text fx-toggle-text--right\"\n  >\n    {{ toggleSupportText() }}\n  </span>\n</div>\n"
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div [ngClass]=\"{ 'fx-toggle': true, 'fx-toggle-focused': isInputFocused() }\">\n  <span\n    *ngIf=\"toggleTextPosition() === 'left'\"\n    id=\"toggle-text-{{ toggleInputId() }}\"\n    class=\"fx-toggle-text fx-toggle-text--left\"\n  >\n    {{ toggleSupportText() }}\n  </span>\n  <label class=\"fx-toggle-switch\">\n    <input\n      [name]=\"'fx_toggle_switch_' + toggleInputId()\"\n      [id]=\"toggleInputId()\"\n      type=\"checkbox\"\n      [checked]=\"isToggledOn()\"\n      (focus)=\"onInputFocus()\"\n      (change)=\"toggleSwitch()\"\n      (blur)=\"onInputBlur()\"\n      (keydown)=\"handleKeyDown($event)\"\n      [attr.aria-checked]=\"isToggledOn()\"\n      [attr.role]=\"'switch'\"\n      [attr.aria-label]=\"'Assign this task to yourself'\"\n      [attr.aria-labelledby]=\"toggleInputId()\"\n      tabindex=\"0\"\n    />\n    <span class=\"fx-toggle-slider\"></span>\n  </label>\n  <span\n    *ngIf=\"toggleTextPosition() === 'right'\"\n    id=\"toggle-text-{{ toggleInputId() }}\"\n    class=\"fx-toggle-text fx-toggle-text--right\"\n  >\n    {{ toggleSupportText() }}\n  </span>\n</div>\n"
         },
         {
             "name": "HomeComponent",
-            "id": "component-HomeComponent-bb167a89072d1d84a33b9f0f6981c0c2",
+            "id": "component-HomeComponent-bd478a1e0e38c334c20464d18f878fd9",
             "file": "src/app/pages/home/home.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -878,7 +1621,9 @@
             "outputs": [],
             "providers": [],
             "selector": "app-home",
-            "styleUrls": [],
+            "styleUrls": [
+                "./home.component.scss"
+            ],
             "styles": [],
             "templateUrl": [
                 "./home.component.html"
@@ -894,7 +1639,7 @@
                     "type": "MenuItem[] | undefined",
                     "optional": false,
                     "description": "",
-                    "line": 34
+                    "line": 35
                 },
                 {
                     "name": "router",
@@ -904,7 +1649,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 35,
+                    "line": 36,
                     "modifierKind": [
                         112
                     ]
@@ -917,7 +1662,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 37,
+                    "line": 38,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -929,14 +1674,135 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit, inject } from '@angular/core';\nimport { MenuItem } from 'primeng/api';\nimport { MenubarModule } from 'primeng/menubar';\nimport { BadgeModule } from 'primeng/badge';\nimport { AvatarModule } from 'primeng/avatar';\nimport { InputTextModule } from 'primeng/inputtext';\nimport { CommonModule } from '@angular/common';\nimport { RippleModule } from 'primeng/ripple';\nimport { Router } from '@angular/router';\nimport { CardModule } from 'primeng/card';\nimport { ButtonModule } from 'primeng/button';\nimport { PanelModule } from 'primeng/panel';\nimport { AnimateModule } from 'primeng/animate';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n  standalone: true,\n  imports: [\n    AnimateModule,\n    CommonModule,\n    MenubarModule,\n    BadgeModule,\n    AvatarModule,\n    InputTextModule,\n    RippleModule,\n    CardModule,\n    ButtonModule,\n    PanelModule,\n  ],\n  animations: [],\n})\nexport class HomeComponent implements OnInit {\n  items: MenuItem[] | undefined;\n  private router = inject(Router);\n\n  ngOnInit() {\n    this.items = [\n      {\n        label: 'Router',\n        icon: 'pi pi-palette',\n        items: [\n          {\n            label: 'Installation',\n            route: '/installation',\n          },\n          {\n            label: 'Configuration',\n            route: '/configuration',\n          },\n        ],\n      },\n      {\n        label: 'Programmatic',\n        icon: 'pi pi-link',\n        command: () => {\n          this.router.navigate(['/installation']);\n        },\n      },\n      {\n        label: 'External',\n        icon: 'pi pi-home',\n        items: [\n          {\n            label: 'Angular',\n            url: 'https://angular.io/',\n          },\n          {\n            label: 'Vite.js',\n            url: 'https://vitejs.dev/',\n          },\n        ],\n      },\n    ];\n  }\n}\n",
+            "sourceCode": "import { Component, OnInit, inject } from '@angular/core';\nimport { MenuItem } from 'primeng/api';\nimport { MenubarModule } from 'primeng/menubar';\nimport { BadgeModule } from 'primeng/badge';\nimport { AvatarModule } from 'primeng/avatar';\nimport { InputTextModule } from 'primeng/inputtext';\nimport { CommonModule } from '@angular/common';\nimport { RippleModule } from 'primeng/ripple';\nimport { Router } from '@angular/router';\nimport { CardModule } from 'primeng/card';\nimport { ButtonModule } from 'primeng/button';\nimport { PanelModule } from 'primeng/panel';\nimport { AnimateModule } from 'primeng/animate';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n  styleUrls: ['./home.component.scss'],\n  standalone: true,\n  imports: [\n    AnimateModule,\n    CommonModule,\n    MenubarModule,\n    BadgeModule,\n    AvatarModule,\n    InputTextModule,\n    RippleModule,\n    CardModule,\n    ButtonModule,\n    PanelModule,\n  ],\n  animations: [],\n})\nexport class HomeComponent implements OnInit {\n  items: MenuItem[] | undefined;\n  private router = inject(Router);\n\n  ngOnInit() {\n    this.items = [\n      {\n        label: 'Router',\n        icon: 'pi pi-palette',\n        items: [\n          {\n            label: 'Installation',\n            route: '/installation',\n          },\n          {\n            label: 'Configuration',\n            route: '/configuration',\n          },\n        ],\n      },\n      {\n        label: 'Programmatic',\n        icon: 'pi pi-link',\n        command: () => {\n          this.router.navigate(['/installation']);\n        },\n      },\n      {\n        label: 'External',\n        icon: 'pi pi-home',\n        items: [\n          {\n            label: 'Angular',\n            url: 'https://angular.io/',\n          },\n          {\n            label: 'Vite.js',\n            url: 'https://vitejs.dev/',\n          },\n        ],\n      },\n    ];\n  }\n}\n",
             "assetsDirs": [],
-            "styleUrlsData": "",
+            "styleUrlsData": [
+                {
+                    "data": "@use \"../../assets/scss/generators/container\" as *;\n\n.card {\n  background: var(--surface-card);\n  padding: 2rem;\n  border-radius: 10px;\n  margin-bottom: 1rem;\n}\n",
+                    "styleUrl": "./home.component.scss"
+                }
+            ],
             "stylesData": "",
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<p-menubar [model]=\"items\">\n  <ng-template pTemplate=\"item\" let-item>\n    <ng-container *ngIf=\"item.route; else urlRef\">\n      <a [routerLink]=\"item.route\" class=\"p-menuitem-link\">\n        <span [class]=\"item.icon\"></span>\n        <span class=\"ml-2\">{{ item.label }}</span>\n      </a>\n    </ng-container>\n    <ng-template #urlRef>\n      <a\n        *ngIf=\"item.url; else noLink\"\n        [href]=\"item.url\"\n        class=\"p-menuitem-link\"\n      >\n        <span [class]=\"item.icon\"></span>\n        <span class=\"ml-2\">{{ item.label }}</span>\n      </a>\n    </ng-template>\n    <ng-template #noLink>\n      <div class=\"p-menuitem-link\">\n        <span [class]=\"item.icon\"></span>\n        <span class=\"ml-2\">{{ item.label }}</span>\n        <span class=\"pi pi-fw pi-angle-down ml-2\"></span>\n      </div>\n    </ng-template>\n  </ng-template>\n</p-menubar>\n<p-card\n  header=\"Advanced Card\"\n  subheader=\"Card Subheader\"\n  [style]=\"{ width: '360px' }\"\n>\n  <ng-template pTemplate=\"header\">\n    <img\n      alt=\"Card\"\n      src=\"https://primefaces.org/cdn/primeng/images/card-ng.jpg\"\n    />\n  </ng-template>\n  <p>Lorem ipsum dolor sit amet...</p>\n  <ng-template pTemplate=\"footer\">\n    <div class=\"flex gap-3 mt-1\">\n      <p-button\n        label=\"Cancel\"\n        severity=\"secondary\"\n        class=\"w-full\"\n        styleClass=\"w-full\"\n      />\n      <p-button label=\"Save\" class=\"w-full\" styleClass=\"w-full\" />\n    </div>\n  </ng-template>\n</p-card>\n<section>\n  <div class=\"card flex justify-content-center\">\n    <p-panel header=\"Header\">\n      <p>\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod\n        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim\n        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint\n        occaecat cupidatat non proident, sunt in culpa qui officia deserunt\n        mollit anim id est laborum.\n      </p>\n    </p-panel>\n  </div>\n</section>\n"
+            "templateData": "<section>\n  <p-menubar [model]=\"items\">\n    <ng-template pTemplate=\"item\" let-item>\n      <ng-container *ngIf=\"item.route; else urlRef\">\n        <a [routerLink]=\"item.route\" class=\"p-menuitem-link\">\n          <span [class]=\"item.icon\"></span>\n          <span class=\"ml-2\">{{ item.label }}</span>\n        </a>\n      </ng-container>\n      <ng-template #urlRef>\n        <a\n          *ngIf=\"item.url; else noLink\"\n          [href]=\"item.url\"\n          class=\"p-menuitem-link\"\n        >\n          <span [class]=\"item.icon\"></span>\n          <span class=\"ml-2\">{{ item.label }}</span>\n        </a>\n      </ng-template>\n      <ng-template #noLink>\n        <div class=\"p-menuitem-link\">\n          <span [class]=\"item.icon\"></span>\n          <span class=\"ml-2\">{{ item.label }}</span>\n          <span class=\"pi pi-fw pi-angle-down ml-2\"></span>\n        </div>\n      </ng-template>\n    </ng-template>\n  </p-menubar>\n\n  <div class=\"container\">\n    <p-card\n      header=\"Advanced Card\"\n      subheader=\"Card Subheader\"\n      [style]=\"{ width: '360px' }\"\n    >\n      <ng-template pTemplate=\"header\">\n        <img\n          alt=\"Card\"\n          src=\"https://primefaces.org/cdn/primeng/images/card-ng.jpg\"\n        />\n      </ng-template>\n      <p>Lorem ipsum dolor sit amet...</p>\n      <ng-template pTemplate=\"footer\">\n        <div class=\"flex gap-3 mt-1\">\n          <p-button\n            label=\"Cancel\"\n            severity=\"secondary\"\n            class=\"w-full\"\n            styleClass=\"w-full\"\n          />\n          <p-button label=\"Save\" class=\"w-full\" styleClass=\"w-full\" />\n        </div>\n      </ng-template>\n    </p-card>\n\n    <p-card\n      header=\"Advanced Card\"\n      subheader=\"Card Subheader\"\n      [style]=\"{ width: '360px' }\"\n    >\n      <ng-template pTemplate=\"header\">\n        <img\n          alt=\"Card\"\n          src=\"https://primefaces.org/cdn/primeng/images/card-ng.jpg\"\n        />\n      </ng-template>\n      <p>Lorem ipsum dolor sit amet...</p>\n      <ng-template pTemplate=\"footer\">\n        <div class=\"flex gap-3 mt-1\">\n          <p-button\n            label=\"Cancel\"\n            severity=\"secondary\"\n            class=\"w-full\"\n            styleClass=\"w-full\"\n          />\n          <p-button label=\"Save\" class=\"w-full\" styleClass=\"w-full\" />\n        </div>\n      </ng-template>\n    </p-card>\n\n    <p>\n      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod\n      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim\n      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\n      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate\n      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id\n      est laborum.\n    </p>\n  </div>\n</section>\n"
+        },
+        {
+            "name": "NewTaskComponent",
+            "id": "component-NewTaskComponent-fd098eef797b52e994a799a4b9593c4c",
+            "file": "src/app/pages/forms/new-task/new-task.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [
+                {
+                    "name": "MessageService"
+                }
+            ],
+            "selector": "app-new-task",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./new-task.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "companyOptions",
+                    "defaultValue": "[\n    'PixelParadise',\n    'CodeHive',\n    'DesignSphere',\n    'CloudVista',\n    'TechHaven',\n    'IdeaForge',\n    'LaunchDock',\n    'SkylineSites',\n    'NexusNodes',\n    'StreamScape',\n    'QuantumPulse',\n    'CyberNest',\n    'EchoGrid',\n    'FusionFrame',\n    'VisionVault',\n    'SolarShift',\n    'MetaMingle',\n    'DynamicDome',\n    'InnoBridge',\n    'ZenWebworks',\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 107
+                },
+                {
+                    "name": "fb",
+                    "defaultValue": "inject(FormBuilder)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 36,
+                    "modifierKind": [
+                        112
+                    ]
+                },
+                {
+                    "name": "messageService",
+                    "defaultValue": "inject(MessageService)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 37,
+                    "modifierKind": [
+                        112
+                    ]
+                },
+                {
+                    "name": "siteOptions",
+                    "defaultValue": "[\n    '123 Maple Street, Springfield, IL 62701',\n    '456 Oak Avenue, Riverdale, NY 10471',\n    '789 Pine Lane, Lakeview, CA 90210',\n    '101 Elm Drive, Meadowbrook, TX 75001',\n    '202 Cedar Boulevard, Mountainview, CO 80401',\n    '303 Birch Road, Brookfield, WI 53005',\n    '404 Willow Court, Sunnyside, FL 33101',\n    '505 Aspen Way, Crestview, OR 97035',\n    '606 Chestnut Circle, Hillside, GA 30303',\n    '707 Redwood Trail, Baytown, WA 98004',\n    '808 Poplar Place, Seaside, MA 01970',\n    '909 Cypress Grove, Woodland, MI 48888',\n    '1001 Magnolia Terrace, Parkland, NJ 07001',\n    '1102 Juniper Crescent, Riverview, MO 63010',\n    '1203 Fir Street, Silverlake, AZ 85001',\n    '1304 Spruce Alley, Greenfield, VT 05641',\n    '1405 Hickory Lane, Elmwood, NM 87501',\n    '1506 Alder Parkway, Ridgewood, MN 55101',\n    '1607 Sycamore Hill, Oakwood, PA 19001',\n    '1708 Ash Terrace, Clearview, NV 89101',\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 67
+                },
+                {
+                    "name": "taskForm",
+                    "defaultValue": "this.fb.group({\n    taskTitle: ['', Validators.required],\n    site: [''],\n    company: [''],\n    technician: [''],\n    assignToMe: [false],\n    taskStatus: ['Pending', Validators.required],\n    taskDescription: [''],\n    taskNotes: [''],\n    startDate: new Date(),\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 39
+                },
+                {
+                    "name": "technicians",
+                    "defaultValue": "[\n    'John Appleseed',\n    'Jane Doe',\n    'James Smith',\n    'Emily Jones',\n    'Michael Johnson',\n    'Jessica Brown',\n    'William Davis',\n    'Patricia Miller',\n    'Richard Wilson',\n    'Jennifer Moore',\n    'Charles Taylor',\n    'Elizabeth Anderson',\n    'Matthew Thomas',\n    'Laura Jackson',\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 90
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "createTask",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 51,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, inject } from '@angular/core';\nimport { FxUiDropdownComponent } from 'src/app/ui-lib/atomic/molecules/form-elements/fx-ui-dropdown/fx-ui-dropdown.component';\nimport { FxUiInputGroupComponent } from 'src/app/ui-lib/atomic/molecules/form-elements/fx-ui-input-group/fx-ui-input-group.component';\nimport { FxUiToggleSwitchComponent } from 'src/app/ui-lib/atomic/molecules/fx-ui-toggle-switch/fx-ui-toggle-switch.component';\nimport { EditorModule } from 'primeng/editor';\nimport { CalendarModule } from 'primeng/calendar';\nimport { FxUiButtonComponent } from '../../../ui-lib/atomic/atoms/fx-ui-button/fx-ui-button.component';\nimport { ToastModule } from 'primeng/toast';\nimport {\n  FormBuilder,\n  FormGroup,\n  ReactiveFormsModule,\n  Validators,\n} from '@angular/forms';\nimport { MessageService } from 'primeng/api';\n@Component({\n  selector: 'app-new-task',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FxUiInputGroupComponent,\n    FxUiToggleSwitchComponent,\n    FxUiDropdownComponent,\n    EditorModule,\n    CalendarModule,\n    FxUiButtonComponent,\n    ReactiveFormsModule,\n    ToastModule,\n  ],\n  templateUrl: './new-task.component.html',\n  styleUrl: './new-task.component.scss',\n  providers: [MessageService],\n})\nexport class NewTaskComponent {\n  private fb = inject(FormBuilder); // Use inject() instead of constructor\n  private messageService = inject(MessageService); // Use inject() instead of constructor\n\n  taskForm: FormGroup = this.fb.group({\n    taskTitle: ['', Validators.required],\n    site: [''],\n    company: [''],\n    technician: [''],\n    assignToMe: [false],\n    taskStatus: ['Pending', Validators.required],\n    taskDescription: [''],\n    taskNotes: [''],\n    startDate: new Date(),\n  });\n\n  createTask() {\n    if (this.taskForm.valid) {\n      this.messageService.add({\n        severity: 'success',\n        summary: 'Success',\n        detail: 'Task Created Successfully',\n      });\n      return;\n    }\n    this.messageService.add({\n      severity: 'error',\n      summary: 'Error',\n      detail: 'Please fill in all required fields',\n    });\n  }\n\n  siteOptions: string[] = [\n    '123 Maple Street, Springfield, IL 62701',\n    '456 Oak Avenue, Riverdale, NY 10471',\n    '789 Pine Lane, Lakeview, CA 90210',\n    '101 Elm Drive, Meadowbrook, TX 75001',\n    '202 Cedar Boulevard, Mountainview, CO 80401',\n    '303 Birch Road, Brookfield, WI 53005',\n    '404 Willow Court, Sunnyside, FL 33101',\n    '505 Aspen Way, Crestview, OR 97035',\n    '606 Chestnut Circle, Hillside, GA 30303',\n    '707 Redwood Trail, Baytown, WA 98004',\n    '808 Poplar Place, Seaside, MA 01970',\n    '909 Cypress Grove, Woodland, MI 48888',\n    '1001 Magnolia Terrace, Parkland, NJ 07001',\n    '1102 Juniper Crescent, Riverview, MO 63010',\n    '1203 Fir Street, Silverlake, AZ 85001',\n    '1304 Spruce Alley, Greenfield, VT 05641',\n    '1405 Hickory Lane, Elmwood, NM 87501',\n    '1506 Alder Parkway, Ridgewood, MN 55101',\n    '1607 Sycamore Hill, Oakwood, PA 19001',\n    '1708 Ash Terrace, Clearview, NV 89101',\n  ];\n\n  technicians: string[] = [\n    'John Appleseed',\n    'Jane Doe',\n    'James Smith',\n    'Emily Jones',\n    'Michael Johnson',\n    'Jessica Brown',\n    'William Davis',\n    'Patricia Miller',\n    'Richard Wilson',\n    'Jennifer Moore',\n    'Charles Taylor',\n    'Elizabeth Anderson',\n    'Matthew Thomas',\n    'Laura Jackson',\n  ];\n\n  companyOptions: string[] = [\n    'PixelParadise',\n    'CodeHive',\n    'DesignSphere',\n    'CloudVista',\n    'TechHaven',\n    'IdeaForge',\n    'LaunchDock',\n    'SkylineSites',\n    'NexusNodes',\n    'StreamScape',\n    'QuantumPulse',\n    'CyberNest',\n    'EchoGrid',\n    'FusionFrame',\n    'VisionVault',\n    'SolarShift',\n    'MetaMingle',\n    'DynamicDome',\n    'InnoBridge',\n    'ZenWebworks',\n  ];\n}\n",
+            "styleUrl": "./new-task.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "templateData": "<section class=\"fx-ui-form container\">\n  <h2>Create a task</h2>\n  <p-toast aria-live=\"polite\"></p-toast>\n  <form [formGroup]=\"taskForm\" aria-labelledby=\"create-task-heading\" novalidate>\n    <div class=\"fx-ui-form-item\">\n      <app-fx-ui-input-group\n        [inputType]=\"'text'\"\n        [inputLabel]=\"'Task title'\"\n        formControlName=\"taskTitle\"\n        [attr.aria-required]=\"true\"\n      ></app-fx-ui-input-group>\n    </div>\n\n    <div class=\"fx-ui-form-item\">\n      <app-fx-ui-dropdown\n        [options]=\"siteOptions\"\n        [optionLabel]=\"'from list of Sites'\"\n        formControlName=\"site\"\n        aria-labelledby=\"siteLabel\"\n      ></app-fx-ui-dropdown>\n    </div>\n\n    <div class=\"fx-ui-form-item\">\n      <app-fx-ui-dropdown\n        [options]=\"companyOptions\"\n        [optionLabel]=\"'from list of Companies'\"\n        formControlName=\"company\"\n        aria-labelledby=\"companyLabel\"\n      ></app-fx-ui-dropdown>\n    </div>\n\n    <div class=\"fx-ui-form-item\">\n      <app-fx-ui-dropdown\n        [id]=\"'technician'\"\n        [options]=\"technicians\"\n        [optionLabel]=\"'from list of Technicians'\"\n        formControlName=\"technician\"\n        aria-labelledby=\"technicianLabel\"\n      ></app-fx-ui-dropdown>\n    </div>\n\n    <div class=\"fx-ui-form-item\">\n      <app-fx-ui-toggle-switch\n        [id]=\"'assignToMe'\"\n        [toggleSupportText]=\"'Assign this task to me'\"\n        [toggleTextPosition]=\"'left'\"\n        formControlName=\"assignToMe\"\n        aria-labelledby=\"assignToMeLabel\"\n        [toggleName]=\"'Do you want to assign this task to yourself?'\"\n      >\n      </app-fx-ui-toggle-switch>\n    </div>\n\n    <div class=\"fx-ui-form-item\">\n      <app-fx-ui-dropdown\n        [id]=\"'taskStatus'\"\n        [options]=\"['Pending', 'In Progress', 'Completed']\"\n        [optionLabel]=\"'task status'\"\n        formControlName=\"taskStatus\"\n        aria-labelledby=\"taskStatusLabel\"\n      ></app-fx-ui-dropdown>\n    </div>\n\n    <div class=\"fx-ui-form-item\">\n      <label for=\"datePicker\">Estimated start date:</label>\n      <p-calendar\n        id=\"datePicker\"\n        [showIcon]=\"true\"\n        dateFormat=\"mm/dd/yy\"\n        formControlName=\"startDate\"\n      ></p-calendar>\n    </div>\n\n    <h5>Task Description</h5>\n    <p-editor\n      formControlName=\"taskDescription\"\n      [style]=\"{ height: '320px' }\"\n      [id]=\"'taskDescription'\"\n      aria-labelledby=\"taskDescription\"\n    >\n      <ng-template #header>\n        <span class=\"ql-formats\">\n          <button type=\"button\" class=\"ql-bold\" aria-label=\"Bold\"></button>\n          <button type=\"button\" class=\"ql-italic\" aria-label=\"Italic\"></button>\n          <button\n            type=\"button\"\n            class=\"ql-underline\"\n            aria-label=\"Underline\"\n          ></button>\n        </span>\n      </ng-template>\n    </p-editor>\n    <h5>Task Notes</h5>\n    <p-editor formControlName=\"taskNotes\" [style]=\"{ height: '320px' }\">\n      <label for=\"richtext\">Task Notes</label>\n      <ng-template #header>\n        <span class=\"ql-formats\">\n          <button type=\"button\" class=\"ql-bold\" aria-label=\"Bold\"></button>\n          <button type=\"button\" class=\"ql-italic\" aria-label=\"Italic\"></button>\n          <button\n            type=\"button\"\n            class=\"ql-underline\"\n            aria-label=\"Underline\"\n          ></button>\n        </span>\n      </ng-template>\n    </p-editor>\n\n    <div class=\"fx-ui-form-item fx-ui-form-item--buttons\">\n      <app-fx-ui-button\n        [label]=\"'Cancel'\"\n        [color]=\"'primary'\"\n        [type]=\"'outline'\"\n        [size]=\"'small'\"\n      ></app-fx-ui-button>\n      <app-fx-ui-button\n        [label]=\"'Create task'\"\n        [color]=\"'primary'\"\n        [type]=\"'fill'\"\n        [size]=\"'small'\"\n        (buttonClickEvent)=\"createTask()\"\n      ></app-fx-ui-button>\n    </div>\n  </form>\n</section>\n"
         },
         {
             "name": "UiLibComponent",
@@ -1169,6 +2035,15 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/pages/forms/new-task/new-task.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "NewTaskComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/pages/home/home.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -1223,12 +2098,21 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/ui-lib/atomic/molecules/form-elements/fx-ui-dropdown/fx-ui-dropdown.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FxUiDropdownComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/17",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/ui-lib/atomic/molecules/form-elements/fx-ui-input-group/fx-ui-input-group.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "FxUiInputGroupComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/16",
                 "status": "low"
             },
             {
@@ -1237,7 +2121,7 @@
                 "linktype": "component",
                 "name": "FxUiStandardFormComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {
@@ -1246,7 +2130,7 @@
                 "linktype": "component",
                 "name": "FxUiToggleSwitchComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/10",
+                "coverageCount": "0/19",
                 "status": "low"
             },
             {

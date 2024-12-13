@@ -1,11 +1,19 @@
 <div class="dropdown">
-  <button class="dropdown-toggle" (click)="toggleDropdown()">
-    {{ selectedOption() || "Select an option" }}
-    <span class="arrow" [class.open]="isOpen()"></span>
+  <label>Select {{ optionLabel() }}</label>
+  <button
+    class="dropdown-toggle"
+    (click)="toggleDropdown($event)"
+    [attr.aria-expanded]="isOpen"
+    [attr.aria-label]="'Drop down toggle to select ' + optionLabel()"
+  >
+    <span class="dropdown-selected">{{ selectedOption() || "" }}</span>
+    <span class="material-symbols-outlined dropdown-arrow">
+      {{ isOpen ? "arrow_drop_up" : "arrow_drop_down" }}
+    </span>
   </button>
-  <ul class="dropdown-menu" *ngIf="isOpen()">
+  <ul class="dropdown-menu" *ngIf="isOpen">
     <li
-      *ngFor="let option of options"
+      *ngFor="let option of options()"
       class="dropdown-item"
       (click)="selectOption(option)"
     >

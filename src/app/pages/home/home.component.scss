@@ -1,3 +1,5 @@
+@use "../../assets/scss/generators/container" as *;
+
 .card {
   background: var(--surface-card);
   padding: 2rem;

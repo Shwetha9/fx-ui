@@ -1,0 +1,125 @@
+<section class="fx-ui-form container">
+  <h2>Create a task</h2>
+  <p-toast aria-live="polite"></p-toast>
+  <form [formGroup]="taskForm" aria-labelledby="create-task-heading" novalidate>
+    <div class="fx-ui-form-item">
+      <app-fx-ui-input-group
+        [inputType]="'text'"
+        [inputLabel]="'Task title'"
+        formControlName="taskTitle"
+        [attr.aria-required]="true"
+      ></app-fx-ui-input-group>
+    </div>
+
+    <div class="fx-ui-form-item">
+      <app-fx-ui-dropdown
+        [options]="siteOptions"
+        [optionLabel]="'from list of Sites'"
+        formControlName="site"
+        aria-labelledby="siteLabel"
+      ></app-fx-ui-dropdown>
+    </div>
+
+    <div class="fx-ui-form-item">
+      <app-fx-ui-dropdown
+        [options]="companyOptions"
+        [optionLabel]="'from list of Companies'"
+        formControlName="company"
+        aria-labelledby="companyLabel"
+      ></app-fx-ui-dropdown>
+    </div>
+
+    <div class="fx-ui-form-item">
+      <app-fx-ui-dropdown
+        [id]="'technician'"
+        [options]="technicians"
+        [optionLabel]="'from list of Technicians'"
+        formControlName="technician"
+        aria-labelledby="technicianLabel"
+      ></app-fx-ui-dropdown>
+    </div>
+
+    <div class="fx-ui-form-item">
+      <app-fx-ui-toggle-switch
+        [id]="'assignToMe'"
+        [toggleSupportText]="'Assign this task to me'"
+        [toggleTextPosition]="'left'"
+        formControlName="assignToMe"
+        aria-labelledby="assignToMeLabel"
+        [toggleName]="'Do you want to assign this task to yourself?'"
+      >
+      </app-fx-ui-toggle-switch>
+    </div>
+
+    <div class="fx-ui-form-item">
+      <app-fx-ui-dropdown
+        [id]="'taskStatus'"
+        [options]="['Pending', 'In Progress', 'Completed']"
+        [optionLabel]="'task status'"
+        formControlName="taskStatus"
+        aria-labelledby="taskStatusLabel"
+      ></app-fx-ui-dropdown>
+    </div>
+
+    <div class="fx-ui-form-item">
+      <label for="datePicker">Estimated start date:</label>
+      <p-calendar
+        id="datePicker"
+        [showIcon]="true"
+        dateFormat="mm/dd/yy"
+        formControlName="startDate"
+      ></p-calendar>
+    </div>
+
+    <h5>Task Description</h5>
+    <p-editor
+      formControlName="taskDescription"
+      [style]="{ height: '320px' }"
+      [id]="'taskDescription'"
+      aria-labelledby="taskDescription"
+    >
+      <ng-template #header>
+        <span class="ql-formats">
+          <button type="button" class="ql-bold" aria-label="Bold"></button>
+          <button type="button" class="ql-italic" aria-label="Italic"></button>
+          <button
+            type="button"
+            class="ql-underline"
+            aria-label="Underline"
+          ></button>
+        </span>
+      </ng-template>
+    </p-editor>
+    <h5>Task Notes</h5>
+    <p-editor formControlName="taskNotes" [style]="{ height: '320px' }">
+      <label for="richtext">Task Notes</label>
+      <ng-template #header>
+        <span class="ql-formats">
+          <button type="button" class="ql-bold" aria-label="Bold"></button>
+          <button type="button" class="ql-italic" aria-label="Italic"></button>
+          <button
+            type="button"
+            class="ql-underline"
+            aria-label="Underline"
+          ></button>
+        </span>
+      </ng-template>
+    </p-editor>
+
+    <div class="fx-ui-form-item fx-ui-form-item--buttons">
+      <app-fx-ui-button
+        [label]="'Cancel'"
+        [color]="'primary'"
+        [type]="'outline'"
+        [size]="'small'"
+      ></app-fx-ui-button>
+      <app-fx-ui-button
+        [label]="'Create task'"
+        [color]="'primary'"
+        [type]="'fill'"
+        [size]="'small'"
+        (buttonClickEvent)="createTask()"
+      ></app-fx-ui-button>
+    </div>
+  </form>
+</section>

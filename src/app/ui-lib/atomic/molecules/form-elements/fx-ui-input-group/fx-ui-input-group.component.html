@@ -3,27 +3,40 @@
     <label [for]="getComputedLabelProps()" class="fx-ui-input-label">
       {{ inputLabel() }}
     </label>
+
     @if (inputType() === "text") {
       <input
         type="text"
-        [id]="getComputedLabelProps()"
         [name]="getComputedLabelProps()"
+        [id]="getComputedLabelProps()"
+        [value]="value"
+        [disabled]="disabled"
+        (input)="onInput($event)"
+        (blur)="onTouched()"
         class="fx-ui-input-text"
       />
     }
     @if (inputType() === "radio") {
       <input
         type="radio"
-        [id]="getComputedLabelProps()"
         [name]="getComputedLabelProps()"
+        [id]="getComputedLabelProps()"
+        [value]="value"
+        [disabled]="disabled"
+        (input)="onInput($event)"
+        (blur)="onTouched()"
         class="fx-ui-input-radio"
       />
     }
     @if (inputType() === "checkbox") {
       <input
         type="checkbox"
-        [id]="getComputedLabelProps()"
         [name]="getComputedLabelProps()"
+        [id]="getComputedLabelProps()"
+        [value]="value"
+        [disabled]="disabled"
+        (input)="onInput($event)"
+        (blur)="onTouched()"
         class="fx-ui-input-checkbox"
       />
     }

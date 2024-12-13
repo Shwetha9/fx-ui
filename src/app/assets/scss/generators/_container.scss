@@ -1,18 +1,18 @@
-@use '../variables/breakpoints' as bp;
-@use '../functions/px-to-rem.scss' as *;
+@use "../variables/breakpoints" as bp;
+@use "../functions/px-to-rem.scss" as *;
 
 // Generate container max widths for breakpoints
 $container-breakpoints: (
-  'xs': (
+  "xs": (
     min-width: #{bp.$breakpoint-xs},
   ),
-  'small': (
+  "small": (
     min-width: #{bp.$breakpoint-sm},
   ),
-  'medium': (
+  "medium": (
     min-width: #{bp.$breakpoint-md},
   ),
-  'large': (
+  "large": (
     min-width: #{bp.$breakpoint-lg},
   ),
 ) !default;

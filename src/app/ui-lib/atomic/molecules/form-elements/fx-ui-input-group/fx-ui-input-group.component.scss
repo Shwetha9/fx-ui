@@ -4,9 +4,10 @@
 
 .fx-ui-input {
   margin: px-to-rem(20) 0;
+
   &-label {
     display: inline-block;
-    margin-bottom: 20px;
+    margin-bottom: 0.5rem;
     font-size: $font-size-base;
   }
   &-radio,
@@ -21,10 +22,12 @@
 
   &-text {
     width: 100%;
-    padding: 10px;
+    padding: 1rem;
     border: 1px solid $grey-500;
     border-radius: 5px;
     font-size: $font-size-sm;
+    font-family: inherit;
+    font-weight: 300;
     &:focus {
       outline: none;
       border: 1px solid $primary;

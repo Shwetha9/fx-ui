@@ -4,7 +4,7 @@
   [attr.aria-pressed]="state() === 'active'"
   [attr.aria-describedby]="label() + '-description'"
   class="fx-button"
-  (click)="handleButtonClick()"
+  (click)="handleButtonClick($event)"
   [ngClass]="classModifiers"
   [disabled]="isDisabled()"
 >
