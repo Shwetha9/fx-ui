@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { NewTaskComponent } from './pages/forms/new-task/new-task.component';
+import { ChangeDetectionExampleComponent } from './pages/change-detection-example/change-detection-example.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -10,10 +11,10 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    component: NewTaskComponent,
+    component: HomeComponent,
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'ChangeDetectionExampleComponent',
   },
 ];

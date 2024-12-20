@@ -11,6 +11,9 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { PanelModule } from 'primeng/panel';
 import { AnimateModule } from 'primeng/animate';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DataService } from 'src/app/services/api-service';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-home',
@@ -28,14 +31,22 @@ import { AnimateModule } from 'primeng/animate';
     CardModule,
     ButtonModule,
     PanelModule,
+    ProgressSpinnerModule,
   ],
+  providers: [DataService],
   animations: [],
 })
 export class HomeComponent implements OnInit {
   items: MenuItem[] | undefined;
   private router = inject(Router);
+  dataService = inject(DataService);
+  products$: { products: Product[] } = { products: [] };
 
   ngOnInit() {
+    console.log('HomeComponent initialized');
+    this.dataService.getData().subscribe((data) => {
+      this.products$ = data.products;
+    });
     this.items = [
       {
         label: 'Router',
