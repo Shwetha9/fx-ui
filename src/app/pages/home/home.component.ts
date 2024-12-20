@@ -14,6 +14,7 @@ import { AnimateModule } from 'primeng/animate';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DataService } from 'src/app/services/api-service';
 import { Product } from '../../models/product.model';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -40,13 +41,13 @@ export class HomeComponent implements OnInit {
   items: MenuItem[] | undefined;
   private router = inject(Router);
   dataService = inject(DataService);
-  products$: { products: Product[] } = { products: [] };
+  products$: Observable<Product[]> | undefined;
 
   ngOnInit() {
-    console.log('HomeComponent initialized');
-    this.dataService.getData().subscribe((data) => {
-      this.products$ = data.products;
-    });
+    this.products$ = this.dataService
+      .getData()
+      .pipe(map((data) => data.products));
+
     this.items = [
       {
         label: 'Router',
