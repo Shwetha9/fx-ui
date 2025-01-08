@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "app/assets/prime-ng/themes/mytheme/theme.scss";
 
+@tailwind utilities;
+
 .material-symbols-outlined {
   font-family: "Material Symbols Outlined";
   font-weight: normal;

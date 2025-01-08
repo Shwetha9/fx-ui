@@ -1,8 +1,7 @@
 @use "../../assets/scss/generators/container" as *;
 
-.card {
-  background: var(--surface-card);
-  padding: 2rem;
-  border-radius: 10px;
-  margin-bottom: 1rem;
+.product-card {
+  &-wrapper {
+    width: 360px;
+  }
 }

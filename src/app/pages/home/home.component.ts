@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { BadgeModule } from 'primeng/badge';
@@ -14,8 +14,8 @@ import { AnimateModule } from 'primeng/animate';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DataService } from 'src/app/services/api-service';
 import { Product } from '../../models/product.model';
-import { map, Observable } from 'rxjs';
-
+import { map, Observable, Subject, takeUntil } from 'rxjs';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -38,52 +38,69 @@ import { map, Observable } from 'rxjs';
   animations: [],
 })
 export class HomeComponent implements OnInit {
-  items: MenuItem[] | undefined;
   private router = inject(Router);
   dataService = inject(DataService);
   products$: Observable<Product[]> | undefined;
+  products$$ = signal<Product[]>([]);
+  destroyRef = inject(DestroyRef);
+
+  items: MenuItem[] = [
+    {
+      label: 'Router',
+      icon: 'pi pi-palette',
+      items: [
+        {
+          label: 'Installation',
+          route: '/installation',
+        },
+        {
+          label: 'Configuration',
+          route: '/configuration',
+        },
+      ],
+    },
+    {
+      label: 'Programmatic',
+      icon: 'pi pi-link',
+      command: () => {
+        this.router.navigate(['/installation']);
+      },
+    },
+    {
+      label: 'External',
+      icon: 'pi pi-home',
+      items: [
+        {
+          label: 'Angular',
+          url: 'https://angular.io/',
+        },
+        {
+          label: 'Vite.js',
+          url: 'https://vitejs.dev/',
+        },
+      ],
+    },
+  ];
 
   ngOnInit() {
-    this.products$ = this.dataService
-      .getData()
-      .pipe(map((data) => data.products));
+    this.products$ = this.dataService.getData().pipe(
+      takeUntilDestroyed(this.destroyRef),
+      map((data) => data.products),
+    );
 
-    this.items = [
-      {
-        label: 'Router',
-        icon: 'pi pi-palette',
-        items: [
-          {
-            label: 'Installation',
-            route: '/installation',
-          },
-          {
-            label: 'Configuration',
-            route: '/configuration',
-          },
-        ],
+    this.dataService.getData().subscribe({
+      next: (res) => {
+        this.products$$.set(res.products);
+        console.log(res.products);
       },
-      {
-        label: 'Programmatic',
-        icon: 'pi pi-link',
-        command: () => {
-          this.router.navigate(['/installation']);
-        },
+      error: (err) => {
+        console.log(err);
       },
-      {
-        label: 'External',
-        icon: 'pi pi-home',
-        items: [
-          {
-            label: 'Angular',
-            url: 'https://angular.io/',
-          },
-          {
-            label: 'Vite.js',
-            url: 'https://vitejs.dev/',
-          },
-        ],
-      },
-    ];
+      complete: () => {
+        console.log('complete');
+      }
+    });
   }
+
+
 }
