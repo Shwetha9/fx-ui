@@ -23,6 +23,13 @@ export interface Product {
   thumbnail: string;
 }
 
+export interface ProductResponse {
+  limit: number;
+  products: Product[];
+  skip: number;
+  total: number;
+}
+
 interface Dimensions {
   width: number;
   height: number;

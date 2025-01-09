@@ -1,6 +1,9 @@
 import {
+  AfterContentInit,
+  AfterViewInit,
   Component,
   DestroyRef,
+  Input,
   OnDestroy,
   OnInit,
   inject,
@@ -16,13 +19,12 @@ import { RippleModule } from 'primeng/ripple';
 import { Router } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
-import { PanelModule } from 'primeng/panel';
 import { AnimateModule } from 'primeng/animate';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-
 import { DataService } from 'src/app/services/api-service';
 import { Product } from '../../models/product.model';
 import { map, Observable, Subject, takeUntil } from 'rxjs';
+import { TasksListComponent } from 'src/app/ui-lib/atomic/molecules/tasks-list/tasks-list.component';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-home',
@@ -39,19 +41,23 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
     RippleModule,
     CardModule,
     ButtonModule,
-    PanelModule,
     ProgressSpinnerModule,
+    TasksListComponent,
   ],
   providers: [DataService],
   animations: [],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent
+  implements OnInit, OnDestroy, AfterViewInit, AfterContentInit
+{
   private router = inject(Router);
   dataService = inject(DataService);
   products$: Observable<Product[]> | undefined;
   products$$ = signal<Product[]>([]);
+  tasks$$ = signal<any[]>([]);
   products: Product[] = [];
   destroyRef = inject(DestroyRef);
+  @Input() title = 'Home';
 
   items: MenuItem[] = [
     {
@@ -92,6 +98,7 @@ export class HomeComponent implements OnInit {
   ];
 
   ngOnInit() {
+    console.log('I am initialized');
     // 1. Returns an observable stream of products
     this.products$ = this.dataService.getData().pipe(
       takeUntilDestroyed(this.destroyRef), // Automatically unsubscribes when the component is destroyed
@@ -104,6 +111,7 @@ export class HomeComponent implements OnInit {
         this.products$$.set(res.products); // Updates the reactive signal with the new products data
         this.products = res.products; // Updates a plain property with the new products data
         console.log(res.products); // Logs the products array
+        console.log(res);
       },
       error: (err) => {
         console.log(err); // Logs any errors during the HTTP request
@@ -112,8 +120,10 @@ export class HomeComponent implements OnInit {
         console.log('complete'); // Logs when the observable completes
       },
     });
+
     this.dataService.getTasks().subscribe({
       next: (res) => {
+        this.tasks$$.set(res);
         console.log(res);
       },
       error: (err) => {
@@ -123,6 +133,19 @@ export class HomeComponent implements OnInit {
         console.log('complete');
       },
     });
+  }
+
+  ngOnChanges() {
+    console.log('Something changed');
+  }
+  ngAfterContentInit() {
+    console.log('Content initialized');
+  }
+  ngAfterViewInit() {
+    console.log('View initialized');
+  }
+  ngOnDestroy() {
+    console.log('I am destroyed');
   }
 
   //https://au-devops-v21.myqa.simprosuite.com/api/mobile/v1.0/companies/0/tasks/?module=TM
