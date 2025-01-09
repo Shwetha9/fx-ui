@@ -27,17 +27,29 @@
     </ng-template>
   </p-menubar>
 
+  <div>
+    <p-progressSpinner
+      *ngIf="!products$$().length"
+      class="spinner"
+      strokeWidth="8"
+      fill="#EEEEEE"
+      animationDuration="2s"
+    ></p-progressSpinner>
+  </div>
+
   <div class="container">
+    <h1>Browse from our list of products</h1>
+    <hr />
     <!-- for every item in the api response of products, we will show a card with product details-->
-    <div class="flex flex-wrap justify-evenly items-stretch">
+    <div class="flex flex-wrap justify-between items-stretch gap-8 mt-16">
       <div
-        *ngFor="let product of products$$()"
-        class="flex flex-col justify-stretch"
+        *ngFor="let product of products"
+        class="flex flex-col justify-stretch flex-auto max-w-sm"
       >
         <p-card
           header="{{ product.title }}"
           subheader="${{ product.price }}"
-          class="mb-8 product-card-wrapper flex-1"
+          class="mb-4 product-card-wrapper flex-1"
           [style]="{ height: '100%' }"
         >
           <ng-template pTemplate="header">
