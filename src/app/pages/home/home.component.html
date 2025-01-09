@@ -29,15 +29,16 @@
 
   <div class="container">
     <!-- for every item in the api response of products, we will show a card with product details-->
-    <div class="flex flex-wrap justify-evenly">
+    <div class="flex flex-wrap justify-evenly items-stretch">
       <div
         *ngFor="let product of products$$()"
-        class="mb-8 product-card-wrapper"
+        class="flex flex-col justify-stretch"
       >
         <p-card
           header="{{ product.title }}"
           subheader="${{ product.price }}"
-          class="product-card"
+          class="mb-8 product-card-wrapper flex-1"
+          [style]="{ height: '100%' }"
         >
           <ng-template pTemplate="header">
             <img
@@ -45,7 +46,9 @@
               src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
             />
           </ng-template>
-          <p>{{ product.description }}</p>
+          <ng-template pTemplate="content">
+            <p>{{ product.description }}</p>
+          </ng-template>
           <ng-template pTemplate="footer">
             <div class="flex gap-3 mt-1">
               <p-button
