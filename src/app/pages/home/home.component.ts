@@ -26,6 +26,8 @@ import { Product } from '../../models/product.model';
 import { map, Observable, Subject, takeUntil } from 'rxjs';
 import { TasksListComponent } from 'src/app/ui-lib/atomic/molecules/tasks-list/tasks-list.component';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { TaskResponse } from 'src/app/models/tasks.model';
+import { transformTasksApiRes } from 'src/app/api-logic/tasks-dto';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -47,14 +49,12 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
   providers: [DataService],
   animations: [],
 })
-export class HomeComponent
-  implements OnInit, OnDestroy, AfterViewInit, AfterContentInit
-{
+export class HomeComponent implements OnInit {
   private router = inject(Router);
   dataService = inject(DataService);
   products$: Observable<Product[]> | undefined;
   products$$ = signal<Product[]>([]);
-  tasks$$ = signal<any[]>([]);
+  tasks$$ = signal<TaskResponse[]>([]);
   products: Product[] = [];
   destroyRef = inject(DestroyRef);
   @Input() title = 'Home';
@@ -98,20 +98,11 @@ export class HomeComponent
   ];
 
   ngOnInit() {
-    console.log('I am initialized');
-    // 1. Returns an observable stream of products
-    this.products$ = this.dataService.getData().pipe(
-      takeUntilDestroyed(this.destroyRef), // Automatically unsubscribes when the component is destroyed
-      map((data) => data.products), // Transforms the response to extract just the products array
-    );
-
     // 2. Subscribes to the observable directly and sets the products array as a signal
     this.dataService.getData().subscribe({
       next: (res) => {
         this.products$$.set(res.products); // Updates the reactive signal with the new products data
         this.products = res.products; // Updates a plain property with the new products data
-        console.log(res.products); // Logs the products array
-        console.log(res);
       },
       error: (err) => {
         console.log(err); // Logs any errors during the HTTP request
@@ -121,32 +112,21 @@ export class HomeComponent
       },
     });
 
-    this.dataService.getTasks().subscribe({
-      next: (res) => {
-        this.tasks$$.set(res);
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-      complete: () => {
-        console.log('complete');
-      },
-    });
+    this.dataService
+      .getTasks()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => {
+          const resDto = transformTasksApiRes(res);
+          console.log(resDto);
+          this.tasks$$.set(resDto);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          console.log('complete');
+        },
+      });
   }
-
-  ngOnChanges() {
-    console.log('Something changed');
-  }
-  ngAfterContentInit() {
-    console.log('Content initialized');
-  }
-  ngAfterViewInit() {
-    console.log('View initialized');
-  }
-  ngOnDestroy() {
-    console.log('I am destroyed');
-  }
-
-  //https://au-devops-v21.myqa.simprosuite.com/api/mobile/v1.0/companies/0/tasks/?module=TM
 }

@@ -27,21 +27,31 @@
     </ng-template>
   </p-menubar>
 
-  <div>
-    <p-progressSpinner
-      *ngIf="!products$$().length"
-      class="spinner"
-      strokeWidth="8"
-      fill="#EEEEEE"
-      animationDuration="2s"
-    ></p-progressSpinner>
-  </div>
+  <div></div>
 
   <div class="container">
+    <div class="mt-12 m-auto w-12 h-12" *ngIf="!products$$().length">
+      <p-progressSpinner
+        class="products-loading"
+        strokeWidth="2"
+        animationDuration="2s"
+        [style]="{ width: '40px', height: '40px' }"
+      ></p-progressSpinner>
+    </div>
     <h1>Browse from our list of tasks</h1>
     <hr />
-
-    <tasks-list></tasks-list>
+    @if (tasks$$().length) {
+      <ng-container *ngFor="let task of tasks$$()">
+        <div class="tasks-list mb-8">
+          <tasks-list
+            [header]="task.subject"
+            [description]="task.description"
+          ></tasks-list>
+        </div>
+      </ng-container>
+    } @else {
+      <p>No tasks available</p>
+    }
     <!-- for every item in the api response of products, we will show a card with product details-->
     <!-- <div class="flex flex-wrap justify-between items-stretch gap-8 mt-16">
       <div

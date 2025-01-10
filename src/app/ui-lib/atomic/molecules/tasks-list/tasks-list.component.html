@@ -1,3 +1,6 @@
-<p-panel header="Header">
-  <p class="m-0">Lorem ipsum dolor sit amet...</p>
+<p-panel header="{{ header$$() }}">
+  <div [innerHTML]="description$$()"></div>
+  <ul>
+    <li *ngFor="let item of footerContent$$()">{{ item }}</li>
+  </ul>
 </p-panel>
