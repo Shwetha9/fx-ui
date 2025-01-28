@@ -25,7 +25,7 @@ export class DataService {
     const token = '';
     const headers = new HttpHeaders().set('Authorization', token);
     return this.http.get<TaskDto[]>(
-      'https://au-devops-v21.myqa.simprosuite.com/api/mobile/v1.0/companies/0/tasks/?module=TM',
+      'https://au-mns-devops-v21.myqa.simprosuite.com/api/mobile/v1.0/companies/54/tasks/?module=TM',
       { headers },
     );
   }

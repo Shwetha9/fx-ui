@@ -28,6 +28,7 @@ import { TasksListComponent } from 'src/app/ui-lib/atomic/molecules/tasks-list/t
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { TaskResponse } from 'src/app/models/tasks.model';
 import { transformTasksApiRes } from 'src/app/api-logic/tasks-dto';
+import { navItems } from './home.component.static';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -59,56 +60,19 @@ export class HomeComponent implements OnInit {
   destroyRef = inject(DestroyRef);
   @Input() title = 'Home';
 
-  items: MenuItem[] = [
-    {
-      label: 'Router',
-      icon: 'pi pi-palette',
-      items: [
-        {
-          label: 'Installation',
-          route: '/installation',
-        },
-        {
-          label: 'Configuration',
-          route: '/configuration',
-        },
-      ],
-    },
-    {
-      label: 'Programmatic',
-      icon: 'pi pi-link',
-      command: () => {
-        this.router.navigate(['/installation']);
-      },
-    },
-    {
-      label: 'External',
-      icon: 'pi pi-home',
-      items: [
-        {
-          label: 'Angular',
-          url: 'https://angular.io/',
-        },
-        {
-          label: 'Vite.js',
-          url: 'https://vitejs.dev/',
-        },
-      ],
-    },
-  ];
+  items: MenuItem[] = navItems;
 
   ngOnInit() {
-    // 2. Subscribes to the observable directly and sets the products array as a signal
     this.dataService.getData().subscribe({
       next: (res) => {
-        this.products$$.set(res.products); // Updates the reactive signal with the new products data
-        this.products = res.products; // Updates a plain property with the new products data
+        this.products$$.set(res.products);
+        this.products = res.products;
       },
       error: (err) => {
-        console.log(err); // Logs any errors during the HTTP request
+        console.log(err);
       },
       complete: () => {
-        console.log('complete'); // Logs when the observable completes
+        console.log('complete');
       },
     });
 
@@ -130,3 +94,42 @@ export class HomeComponent implements OnInit {
       });
   }
 }
+
+// this.dataService
+//   .getTasks()
+//   .pipe(
+//     map((res) => res.tasks.filter((task) => task.completed)), // Extract only completed tasks
+//     takeUntilDestroyed(this.destroyRef)
+//   )
+//   .subscribe({
+//     next: (completedTasks) => {
+//       console.log(completedTasks); // Log completed tasks
+//       this.tasks$$.set(completedTasks); // Update the state with completed tasks
+//     },
+//     error: (err) => {
+//       console.error('Error fetching tasks:', err);
+//     },
+//     complete: () => {
+//       console.log('Task fetching completed.');
+//     },
+//   });
+
+// this.dataService
+//   .getTechnicians()
+//   .pipe(
+//     filter((res) => res.technicians && res.technicians.length > 0), // Proceed only if technicians exist
+//     map((res) => res.technicians), // Extract the list of technicians
+//     takeUntilDestroyed(this.destroyRef)
+//   )
+//   .subscribe({
+//     next: (technicians) => {
+//       console.log(technicians); // Log the list of technicians
+//       this.technicians$$.set(technicians); // Update the state with the list of technicians
+//     },
+//     error: (err) => {
+//       console.error('Error fetching technicians:', err);
+//     },
+//     complete: () => {
+//       console.log('Technician fetching completed.');
+//     },
+//   });
